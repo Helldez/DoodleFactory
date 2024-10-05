@@ -19,13 +19,12 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 900;
+            z-index: 1000;
             padding: 10px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             opacity: 0.95;
-            height: 100px;
         }
         header .title-container {
             display: flex;
@@ -45,7 +44,6 @@
         nav {
             display: flex;
             gap: 15px;
-            align-items: center;
         }
         nav a {
             color: #8a2b25;
@@ -65,29 +63,42 @@
             padding: 10px;
             font-size: 2em;
         }
-        @media only screen and (max-width: 768px) {
-            nav {
-                display: none;
-                flex-direction: column;
-                background-color: #f5d5c0;
-                padding: 10px;
-                position: absolute;
-                top: 100px;
-                right: 20px;
-                border-radius: 10px;
-                width: 50%;
-            }
-            #menu-toggle {
-                display: block;
-                margin-right: 20px;
-            }
+        .banner-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            margin-top: 100px;
+        }
+        .banner-container img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        .banner-arrow {
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+        .banner-arrow.left {
+            left: 10px;
+        }
+        .banner-arrow.right {
+            right: 10px;
         }
         section {
             padding: 40px;
-            margin: 160px 0 40px 0;
+            margin: 40px 0;
             background-color: #ffffff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
         }
         .illustrations {
             display: flex;
@@ -113,37 +124,25 @@
             background-color: #f5d5c0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 40px;
-            width: 100%;
         }
-        .banner-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            overflow: hidden;
-            margin-top: 160px;
-        }
-        .banner-container img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
-        .banner-arrow {
-            position: absolute;
-            top: 50%;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            font-size: 2em;
-            cursor: pointer;
-            transform: translateY(-50%);
-        }
-        .banner-arrow.left {
-            left: 10px;
-        }
-        .banner-arrow.right {
-            right: 10px;
+        @media only screen and (max-width: 768px) {
+            nav {
+                display: none;
+                flex-direction: column;
+                background-color: #f5d5c0;
+                padding: 10px;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                border-radius: 0 0 10px 10px;
+            }
+            #menu-toggle {
+                display: block;
+            }
+            .banner-container {
+                margin-top: 120px;
+            }
         }
     </style>
 </head>
@@ -244,10 +243,38 @@
         const menu = document.getElementById('menu');
         const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
         let currentBannerIndex = 0;
+        let bannerInterval;
 
         menuToggle.addEventListener('click', () => {
-            menu.style.display = menu.style.display === 'none' || menu.style.display === '' ? 'block' : 'none';
+            menu.style.display = menu.style.display === 'none' || menu.style.display === '' ? 'flex' : 'none';
         });
+
+        function changeBanner(direction) {
+            currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
+            document.getElementById('current-banner').src = banners[currentBannerIndex];
+        }
+
+        function startBannerRotation() {
+            bannerInterval = setInterval(() => changeBanner(1), 5000);
+        }
+
+        function stopBannerRotation() {
+            clearInterval(bannerInterval);
+        }
+
+        document.getElementById('prev-banner').addEventListener('click', () => {
+            stopBannerRotation();
+            changeBanner(-1);
+            startBannerRotation();
+        });
+
+        document.getElementById('next-banner').addEventListener('click', () => {
+            stopBannerRotation();
+            changeBanner(1);
+            startBannerRotation();
+        });
+
+        startBannerRotation();
 
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
@@ -256,19 +283,6 @@
                 menu.style.display = 'none';
             }
         });
-
-        function changeBanner(direction) {
-            currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
-            document.getElementById('current-banner').src = banners[currentBannerIndex];
-        }
-
-        document.getElementById('prev-banner').addEventListener('click', () => changeBanner(-1));
-        document.getElementById('next-banner').addEventListener('click', () => changeBanner(1));
-
-        // Cambia il banner automaticamente ogni 5 secondi
-        setInterval(() => {
-            changeBanner(1);
-        }, 5000);
     </script>
 </body>
 </html>
