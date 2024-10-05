@@ -155,9 +155,16 @@
                 top: 100%;
                 left: 0;
                 right: 0;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            nav.show {
+                display: flex;
             }
             nav a {
-                padding: 5px 0;
+                padding: 10px 20px;
+                width: 100%;
+                box-sizing: border-box;
+                text-align: left;
             }
             #menu-toggle {
                 display: block;
@@ -277,7 +284,7 @@
         let bannerInterval;
 
         menuToggle.addEventListener('click', () => {
-            menu.style.display = menu.style.display === 'none' || menu.style.display === '' ? 'flex' : 'none';
+            menu.classList.toggle('show');
             adjustBannerMargin();
         });
 
