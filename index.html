@@ -147,6 +147,10 @@
             .illustrations img {
                 width: calc(100% - 20px); /* Le immagini occupano tutta la larghezza del contenitore su dispositivi mobili */
             }
+            body {
+                padding-top: 80px; /* Altezza dell'header */
+            }
+        
             header {
                 position: fixed;
                 top: 0;
@@ -155,14 +159,14 @@
                 z-index: 1000;
                 background-color: #f5d5c0;
                 padding: 10px 20px;
-                height: auto;
+                height: 80px; /* Altezza fissa per l'header */
             }
         
             #menu-toggle {
                 display: block;
                 position: absolute;
-                top: 10px;
-                right: 10px;
+                top: 15px;
+                right: 15px;
                 z-index: 1002;
                 background-color: #85aab2;
                 color: white;
@@ -175,16 +179,17 @@
             nav {
                 display: none;
                 position: fixed;
-                top: 0;
+                top: 80px; /* Inizia sotto l'header */
                 left: 0;
                 right: 0;
                 bottom: 0;
                 background-color: rgba(245, 213, 192, 0.95);
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
                 z-index: 1001;
                 overflow-y: auto;
+                padding-top: 20px;
             }
         
             nav.show {
@@ -199,8 +204,13 @@
             }
         
             .banner-container {
-                margin-top: 100px;
+                margin-top: 0; /* Rimuoviamo il margin-top qui */
             }
+        
+            body.menu-open {
+                overflow: hidden;
+            }
+        }
         }
             section h2 {
                 font-size: 2.2em;
