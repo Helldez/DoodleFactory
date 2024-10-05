@@ -10,7 +10,7 @@
     <style>
         body {
             background-color: #fdfdfd;
-            font-family: 'Satisfy', cursive, sans-serif;
+            font-family: 'Just Another Hand', cursive, sans-serif;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -88,7 +88,7 @@
             font-size: 1em;
             color: #8a2b25; /* Bordò */
             background-color: #f5d5c0;
-            border-radius: 20px;
+            
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 40px;
         }
@@ -116,18 +116,17 @@
             }
         }
     </style>
-</head>
+<link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
+    </head>
 <body>
-    <div class="contact-bar" style="background-color: #f5d5c0; padding: 10px; text-align: center; font-size: 1.2em; width: 100%;">
+    <div class="contact-bar" style="background-color: #f5d5c0; padding: 5px; text-align: center; font-size: 1em; width: 100%;">
         <p>Contatti: email@example.com - Telefono: +39 123 456 789 | Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
     </div>
-    <header>
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-            <h1 style="color: #8a2b25;">Doodle Factory Lab</h1>
-            <button id="menu-toggle" style="display: none; background-color: #85aab2; color: white; border: none; padding: 10px; position: absolute; right: 20px;">&#9776;</button>
-        </div>
+    <header style="text-align: center;">
+        <h1 style="color: #8a2b25;">Doodle Factory Lab</h1>
         <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
-        <nav id="menu" style="display: block; text-align: center; background-color: #85aab2; padding: 15px;">
+    </header>
+        <nav id="menu" style="display: block; text-align: center; background-color: #85aab2; padding: 15px; width: 100%; margin: 0 auto;">
             <a href="#about">Chi sono</a>
             <a href="#portraits">Ritratti</a>
             <a href="#illustrations">Illustrazioni</a>
@@ -179,7 +178,14 @@
         });
     </script>
     <div id="banner" style="width: 100%; height: 300px; overflow: hidden; margin-top: 40px; margin-bottom: 20px; text-align: center;">
-        <img src="Banner4.PNG" alt="Banner" style="width: 100%; height: 300px; object-fit: cover;">
+        <img src="banner4.PNG" alt="Banner" style="width: 100%; height: 300px; object-fit: cover;">
+    </div>
+    <div id="banner-carousel" style="width: 100%; height: 300px; overflow: hidden; margin-top: 20px;">
+        <div class="carousel" style="display: flex;">
+            <img src="banner2.PNG" alt="Banner 2" style="width: 100%; height: 300px; object-fit: cover;">
+            <img src="banner3.PNG" alt="Banner 3" style="width: 100%; height: 300px; object-fit: cover;">
+            <img src="banner4.PNG" alt="Banner 4" style="width: 100%; height: 300px; object-fit: cover;">
+        </div>
     </div>
     <section id="about" style="text-align: center;">
         <img src="profiloDF1.jfif" alt="Profilo Doodle Factory" style="margin: 0 auto; display: block; width: 250px; height: 250px; border-radius: 15px; object-fit: cover;">
