@@ -66,7 +66,6 @@
             border: none;
             padding: 10px;
             font-size: 2em;
-            cursor: pointer;
         }
         .banner-container {
             position: relative;
@@ -117,15 +116,16 @@
         .illustrations {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 20px; /* Spaziatura ridotta per migliorare la compattezza su schermi piccoli */
             justify-content: center;
         }
+        
         .illustrations img {
-            width: calc(100% / 2 - 20px);
-            max-width: 300px;
-            height: auto;
-            object-fit: cover;
-            object-position: center;
+            width: calc(100% / 2 - 20px); /* Le immagini occuperanno metà della larghezza del contenitore meno il margine */
+            max-width: 300px; /* Larghezza massima per evitare che le immagini siano troppo grandi su desktop */
+            height: auto; /* Mantiene le proporzioni corrette */
+            object-fit: cover; /* Fa sì che le immagini riempiano il contenitore senza distorsioni */
+            object-position: center; /* Centra l'immagine */
             border-radius: 15px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -145,7 +145,7 @@
 
         @media only screen and (max-width: 768px) {
             .illustrations img {
-                width: calc(100% - 20px);
+                width: calc(100% - 20px); /* Le immagini occupano tutta la larghezza del contenitore su dispositivi mobili */
             }
             header {
                 flex-direction: column;
@@ -160,7 +160,7 @@
                 width: 100%;
                 padding: 10px 0;
                 position: fixed;
-                top: 80px;
+                top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
@@ -204,16 +204,15 @@
             <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
         </div>
         <button id="menu-toggle">&#9776;</button>
+        <nav id="menu">
+            <a href="#about">Chi sono</a>
+            <a href="#portraits">Ritratti</a>
+            <a href="#illustrations">Illustrazioni</a>
+            <a href="#wedding">Wedding</a>
+            <a href="#favors">Bomboniere</a>
+            <a href="#live_sketches">Ritrattini dal vivo</a>
+        </nav>
     </header>
-
-    <nav id="menu">
-        <a href="#about">Chi sono</a>
-        <a href="#portraits">Ritratti</a>
-        <a href="#illustrations">Illustrazioni</a>
-        <a href="#wedding">Wedding</a>
-        <a href="#favors">Bomboniere</a>
-        <a href="#live_sketches">Ritrattini dal vivo</a>
-    </nav>
 
     <div class="banner-container">
         <img src="Banner3.PNG" alt="Banner 1" id="current-banner">
@@ -228,10 +227,10 @@
             <p>Ciao, che bello che sei qui! </p>
             <p>Sono Marina, grafica e illustratrice freelance.</p>
             <p>Doodle Factory Lab è il mio laboratorio creativo, dove ricordi ed emozioni prendono forma e colore.</p> 
-            <p>Sono nata in una notte tempestosa d'estate sotto il segno del Cancro, amo la cioccolata, l'arte in tutte le sue forme e tutto ciò che richiede manualità.</p>  
+            <p>Sono nata in una notte tempestosa d’estate sotto il segno del Cancro, amo la cioccolata, l’arte in tutte le sue forme e tutto ciò che richiede manualità.</p>  
             <p>Col tempo, ho capito che ciò che amo fare di più è disegnare e avere sempre qualcosa di nuovo su cui lavorare. Nel mio lab impacchetto tra fiori essiccati, nastri e un bel pó di sano disordine creativo.</p>  
-            <p>Qui puoi trovare Ritratti e Illustrazioni personalizzate, bigliettini d'auguri, tag, bomboniere con un tocco artistico, coordinati grafici per qualsiasi tipo di evento e, se hai un brand o un'azienda, posso aiutarti tramite progetti illustrati su misura per te. 
-            Prenditi pure un po' di tempo per curiosare….</p>
+            <p>Qui puoi trovare Ritratti e Illustrazioni personalizzate, bigliettini d’auguri, tag, bomboniere con un tocco artistico, coordinati grafici per qualsiasi tipo di evento e, se hai un brand o un’azienda, posso aiutarti tramite progetti illustrati su misura per te. 
+            Prenditi pure un po’ di tempo per curiosare….</p>
         </div>
     </section>
 
@@ -239,7 +238,7 @@
         <h2>Ritratti</h2>
         <p>I ritratti sono sempre mezzobusto e abbracciati, le linee sono morbide e tondeggianti. Sullo sfondo si possono aggiungere una breve frase o piccoli pattern. </p>
         <p>Per realizzarli ho bisogno di due foto per soggetto, non importa che sia una foto di gruppo, bastano due primi piani in cui si vedono bene volto e capelli. </p>
-        <p>Confrontarci, raccontarci e dare un'anima al progetto sarà fondamentale per entrare in empatia e far sì che il risultato ti emozioni.</p>
+        <p>Confrontarci, raccontarci e dare un’anima al progetto sarà fondamentale per entrare in empatia e far sì che il risultato ti emozioni.</p>
         <p>Il ritratto è stampato su carta biologica 300gr, il formato è unico, 20x29 con cornice, bianca e in legno.</p>
         <p>I miei progetti hanno bisogno di tempo, comunicami la data massima di consegna e io la rispetterò.</p>
         <div class="illustrations">
@@ -301,55 +300,44 @@
     </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM fully loaded');
         const menuToggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
         const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
         let currentBannerIndex = 0;
         let bannerInterval;
 
-        function toggleMenu() {
-            console.log('Toggle menu called');
+        menuToggle.addEventListener('click', () => {
             menu.classList.toggle('show');
-            document.body.style.overflow = menu.classList.contains('show') ? 'hidden' : '';
             adjustBannerMargin();
-        }
-
-        menuToggle.addEventListener('click', function(event) {
-            console.log('Menu toggle clicked');
-            event.stopPropagation();
-            toggleMenu();
-        });
-
-        document.addEventListener('click', (event) => {
-            if (menu.classList.contains('show') && !menu.contains(event.target) && event.target !== menuToggle) {
-                toggleMenu();
-            }
         });
 
         const navLinks = document.querySelectorAll('#menu a');
-
+        
         navLinks.forEach(link => {
             link.addEventListener('click', (event) => {
-                event.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
+                event.preventDefault(); // Previene il comportamento di default del link
+                const targetId = link.getAttribute('href').substring(1); // Ottiene l'id della sezione
+                const targetElement = document.getElementById(targetId); // Seleziona l'elemento target
                 
+                // Calcola la posizione rispetto all'inizio della pagina
                 const headerHeight = document.querySelector('header').offsetHeight;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
-
+        
+                // Scorrimento fluido con offset corretto
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
-
+        
+                // Nasconde il menu mobile e ripristina lo scrolling del corpo
                 if (menu.classList.contains('show')) {
-                    toggleMenu();
+                    menu.classList.remove('show');
+                    document.body.style.overflow = '';
+                    adjustBannerMargin();
                 }
             });
         });
-
+        
         function changeBanner(direction) {
             currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
             document.getElementById('current-banner').src = banners[currentBannerIndex];
@@ -380,25 +368,21 @@
         function adjustBannerMargin() {
             const header = document.querySelector('header');
             const bannerContainer = document.querySelector('.banner-container');
-            bannerContainer.style.marginTop = `${header.offsetHeight}px`;
+            bannerContainer.style.marginTop = ${header.offsetHeight}px;
         }
 
-        function handleResize() {
-            console.log('Window resized');
+        window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 menu.style.display = 'flex';
             } else {
-                menu.style.display = menu.classList.contains('show') ? 'flex' : 'none';
+                menu.style.display = 'none';
             }
             adjustBannerMargin();
-        }
+        });
 
-        window.addEventListener('resize', handleResize);
-
-        // Inizializzazione iniziale
-        handleResize();
+        // Initial adjustment
         adjustBannerMargin();
-    });
+
     </script>
 </body>
 </html>
