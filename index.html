@@ -122,26 +122,20 @@
         <p>Contatti: email@example.com - Telefono: +39 123 456 789 | Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
     </div>
     <header>
-        <button id="menu-toggle" style="display: none; background-color: #85aab2; color: white; border: none; padding: 10px; position: absolute; top: 20px; left: 20px;">&#9776;</button>
-        <h1 style="color: #8a2b25;">Doodle Factory Lab</h1>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <h1 style="color: #8a2b25;">Doodle Factory Lab</h1>
+            <button id="menu-toggle" style="display: none; background-color: #85aab2; color: white; border: none; padding: 10px;">&#9776;</button>
+        </div>
         <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
     </header>
-    <nav>
-        <button id="menu-toggle" style="display: none; background-color: #85aab2; color: white; border: none; padding: 10px; position: absolute; top: 20px; right: 20px;">&#9776;</button>
-        <div id="menu" style="display: block;">
-            <a href="#about">Chi sono</a>
-            <a href="#portraits">Ritratti</a>
-            <a href="#illustrations">Illustrazioni</a>
-            <a href="#wedding">Wedding</a>
-            <a href="#favors">Bomboniere</a>
-            <a href="#live_sketches">Ritrattini dal vivo</a>
-        </div>
-    </nav>
+    
     <script>
         const menuToggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
-        menuToggle.style.display = 'block';
-        menu.style.display = 'none';
+        menuToggle.style.display = 'none';
+        if (window.innerWidth <= 768) {
+            menuToggle.style.display = 'block';
+        }
         menuToggle.addEventListener('click', () => {
             menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
         });
@@ -176,7 +170,7 @@
         });
     </script>
     <div id="banner" style="width: 100%; height: 300px; overflow: hidden; margin-top: 40px; margin-bottom: 20px; text-align: center;">
-        <img src="banner4.png" alt="Banner" style="width: 100%; object-fit: cover;">
+        <img src="banner4.PNG" alt="Banner" style="width: 100%; object-fit: cover;">
     </div>
     <section id="about" style="text-align: center;">
         <img src="profiloDF1.jfif" alt="Profilo Doodle Factory" style="margin: 0 auto; display: block; width: 250px; height: 250px; border-radius: 15px; object-fit: cover;">
