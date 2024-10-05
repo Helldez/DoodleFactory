@@ -317,6 +317,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('menu-toggle');
             const menu = document.getElementById('menu');
+            const body = document.body;
             const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
             let currentBannerIndex = 0;
             let bannerInterval;
@@ -324,12 +325,7 @@
             function toggleMenu(event) {
                 event.stopPropagation();
                 menu.classList.toggle('show');
-                if (menu.classList.contains('show')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
-                }
-                adjustBannerMargin();
+                body.classList.toggle('menu-open');
             }
         
             menuToggle.addEventListener('click', toggleMenu);
@@ -390,28 +386,20 @@
         
             startBannerRotation();
         
-            function adjustBannerMargin() {
-                const header = document.querySelector('header');
-                const bannerContainer = document.querySelector('.banner-container');
-                bannerContainer.style.marginTop = `${header.offsetHeight}px`;
-            }
-        
             function handleResize() {
                 if (window.innerWidth > 768) {
                     menu.style.display = 'flex';
                     menu.classList.remove('show');
-                    document.body.style.overflow = '';
+                    body.classList.remove('menu-open');
                 } else {
                     menu.style.display = menu.classList.contains('show') ? 'flex' : 'none';
                 }
-                adjustBannerMargin();
             }
         
             window.addEventListener('resize', handleResize);
         
             // Initial setup
             handleResize();
-            adjustBannerMargin();
         });
 
     </script>
