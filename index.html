@@ -300,103 +300,108 @@
     </footer>
 
     <script>
-        // Dichiarazioni delle variabili
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
-        const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
-        let currentBannerIndex = 0;
-        let bannerInterval;
+        // Attendiamo che il DOM sia completamente caricato prima di eseguire il nostro codice
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dichiarazioni delle variabili
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('menu');
+            const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
+            let currentBannerIndex = 0;
+            let bannerInterval;
         
-        // Gestione del menu mobile
-        menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('show');
-            document.body.style.overflow = menu.classList.contains('show') ? 'hidden' : '';
-            adjustBannerMargin();
-        });
-        
-        // Chiusura del menu cliccando al di fuori
-        document.addEventListener('click', (event) => {
-            if (menu.classList.contains('show') && !menu.contains(event.target) && event.target !== menuToggle) {
-                menu.classList.remove('show');
-                document.body.style.overflow = '';
+            // Funzione per gestire l'apertura/chiusura del menu
+            function toggleMenu() {
+                menu.classList.toggle('show');
+                document.body.style.overflow = menu.classList.contains('show') ? 'hidden' : '';
                 adjustBannerMargin();
             }
-        });
         
-        // Gestione dei link di navigazione
-        const navLinks = document.querySelectorAll('#menu a');
+            // Gestione del menu mobile
+            menuToggle.addEventListener('click', toggleMenu);
         
-        navLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
-        
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-        
-                if (menu.classList.contains('show')) {
-                    menu.classList.remove('show');
-                    document.body.style.overflow = '';
-                    adjustBannerMargin();
+            // Chiusura del menu cliccando al di fuori
+            document.addEventListener('click', (event) => {
+                if (menu.classList.contains('show') && !menu.contains(event.target) && event.target !== menuToggle) {
+                    toggleMenu();
                 }
             });
-        });
         
-        // Funzioni per il cambio del banner
-        function changeBanner(direction) {
-            currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
-            document.getElementById('current-banner').src = banners[currentBannerIndex];
-        }
+            // Gestione dei link di navigazione
+            const navLinks = document.querySelectorAll('#menu a');
         
-        function startBannerRotation() {
-            bannerInterval = setInterval(() => changeBanner(1), 5000);
-        }
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
         
-        function stopBannerRotation() {
-            clearInterval(bannerInterval);
-        }
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
         
-        // Event listener per le frecce del banner
-        document.getElementById('prev-banner').addEventListener('click', () => {
-            stopBannerRotation();
-            changeBanner(-1);
-            startBannerRotation();
-        });
+                    if (menu.classList.contains('show')) {
+                        toggleMenu();
+                    }
+                });
+            });
         
-        document.getElementById('next-banner').addEventListener('click', () => {
-            stopBannerRotation();
-            changeBanner(1);
-            startBannerRotation();
-        });
-        
-        // Avvio della rotazione automatica del banner
-        startBannerRotation();
-        
-        // Funzione per aggiustare il margine del banner
-        function adjustBannerMargin() {
-            const header = document.querySelector('header');
-            const bannerContainer = document.querySelector('.banner-container');
-            bannerContainer.style.marginTop = `${header.offsetHeight}px`;
-        }
-        
-        // Gestione del ridimensionamento della finestra
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                menu.style.display = 'flex';
-            } else {
-                menu.style.display = menu.classList.contains('show') ? 'flex' : 'none';
+            // Funzioni per il cambio del banner
+            function changeBanner(direction) {
+                currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
+                document.getElementById('current-banner').src = banners[currentBannerIndex];
             }
+        
+            function startBannerRotation() {
+                bannerInterval = setInterval(() => changeBanner(1), 5000);
+            }
+        
+            function stopBannerRotation() {
+                clearInterval(bannerInterval);
+            }
+        
+            // Event listener per le frecce del banner
+            document.getElementById('prev-banner').addEventListener('click', () => {
+                stopBannerRotation();
+                changeBanner(-1);
+                startBannerRotation();
+            });
+        
+            document.getElementById('next-banner').addEventListener('click', () => {
+                stopBannerRotation();
+                changeBanner(1);
+                startBannerRotation();
+            });
+        
+            // Avvio della rotazione automatica del banner
+            startBannerRotation();
+        
+            // Funzione per aggiustare il margine del banner
+            function adjustBannerMargin() {
+                const header = document.querySelector('header');
+                const bannerContainer = document.querySelector('.banner-container');
+                bannerContainer.style.marginTop = `${header.offsetHeight}px`;
+            }
+        
+            // Gestione del ridimensionamento della finestra
+            function handleResize() {
+                if (window.innerWidth > 768) {
+                    menu.style.display = 'flex';
+                } else {
+                    menu.style.display = menu.classList.contains('show') ? 'flex' : 'none';
+                }
+                adjustBannerMargin();
+            }
+        
+            window.addEventListener('resize', handleResize);
+        
+            // Inizializzazione iniziale
+            handleResize();
             adjustBannerMargin();
         });
-        
-        // Aggiustamento iniziale
-        adjustBannerMargin();
 
     </script>
 </body>
