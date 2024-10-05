@@ -307,20 +307,24 @@
             let currentBannerIndex = 0;
             let bannerInterval;
         
-            function toggleMenu() {
+            function toggleMenu(event) {
+                event.stopPropagation();
                 menu.classList.toggle('show');
-                adjustBannerMargin();
                 if (menu.classList.contains('show')) {
                     document.body.style.overflow = 'hidden';
                 } else {
                     document.body.style.overflow = '';
                 }
+                adjustBannerMargin();
             }
         
             menuToggle.addEventListener('click', toggleMenu);
-            menuToggle.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                toggleMenu();
+        
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (menu.classList.contains('show') && !menu.contains(event.target) && event.target !== menuToggle) {
+                    toggleMenu(event);
+                }
             });
         
             const navLinks = document.querySelectorAll('#menu a');
@@ -340,7 +344,7 @@
                     });
             
                     if (menu.classList.contains('show')) {
-                        toggleMenu();
+                        toggleMenu(event);
                     }
                 });
             });
@@ -384,8 +388,7 @@
                     menu.classList.remove('show');
                     document.body.style.overflow = '';
                 } else {
-                    menu.style.display = 'none';
-                    menu.classList.remove('show');
+                    menu.style.display = menu.classList.contains('show') ? 'flex' : 'none';
                 }
                 adjustBannerMargin();
             }
