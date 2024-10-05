@@ -7,60 +7,86 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #ffefd5;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
             color: #333;
             margin: 0;
             padding: 0;
         }
         header {
-            background-color: #ffa500;
-            color: white;
+            background-color: white;
+            border-bottom: 1px solid #eaeaea;
             padding: 20px;
             text-align: center;
         }
+        header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5em;
+            margin: 0;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
         .hero {
             text-align: center;
-            padding: 50px;
+            padding: 100px 20px;
             background-image: url('hero.jpg');
             background-size: cover;
             background-position: center;
+            color: white;
         }
         .hero h1 {
-            font-size: 3em;
+            font-size: 3.5em;
             margin: 0;
         }
         .services {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            padding: 20px;
+            gap: 30px;
+            padding: 40px;
+            justify-content: center;
         }
         .service {
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             flex: 1;
-            padding: 20px;
+            padding: 30px;
             text-align: center;
-            max-width: 300px;
+            max-width: 350px;
+        }
+        .service img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
         }
         .contact {
             text-align: center;
-            padding: 40px;
+            padding: 60px;
+            background-color: #fafafa;
         }
         footer {
-            background-color: #ffa500;
+            background-color: #333;
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Doodle Factory</h1>
-        <p>Illustrazioni Colorate e Creative per Ogni Occasione</p>
+        <nav>
+            <a href="#">Portfolio</a>
+            <a href="#">Chi sono</a>
+            <a href="#">Contatti</a>
+        </nav>
     </header>
 
     <section class="hero">
@@ -70,14 +96,17 @@
 
     <section class="services">
         <div class="service">
+            <img src="illustrazione1.jpg" alt="Illustrazione Personalizzata">
             <h2>Illustrazioni Personalizzate</h2>
             <p>Creiamo illustrazioni su misura per i tuoi progetti personali o commerciali.</p>
         </div>
         <div class="service">
+            <img src="stampe.jpg" alt="Stampe e Quadri">
             <h2>Stampe e Quadri</h2>
             <p>Acquista stampe di alta qualità per decorare la tua casa o il tuo ufficio.</p>
         </div>
         <div class="service">
+            <img src="workshop.jpg" alt="Workshop Creativi">
             <h2>Workshop Creativi</h2>
             <p>Partecipa ai nostri workshop e scopri come creare illustrazioni meravigliose.</p>
         </div>
