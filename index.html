@@ -299,45 +299,45 @@
         <p>Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
     </footer>
 
-    <script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
         const menuToggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
         const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
         let currentBannerIndex = 0;
         let bannerInterval;
 
+        // Menu toggle click listener
         menuToggle.addEventListener('click', () => {
             menu.classList.toggle('show');
             adjustBannerMargin();
         });
 
+        // Navigation link smooth scroll
         const navLinks = document.querySelectorAll('#menu a');
-        
         navLinks.forEach(link => {
             link.addEventListener('click', (event) => {
-                event.preventDefault(); // Previene il comportamento di default del link
-                const targetId = link.getAttribute('href').substring(1); // Ottiene l'id della sezione
-                const targetElement = document.getElementById(targetId); // Seleziona l'elemento target
+                event.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
                 
-                // Calcola la posizione rispetto all'inizio della pagina
                 const headerHeight = document.querySelector('header').offsetHeight;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
-        
-                // Scorrimento fluido con offset corretto
+                
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
-        
-                // Nasconde il menu mobile e ripristina lo scrolling del corpo
+                
+                // Hide mobile menu after clicking a link
                 if (menu.classList.contains('show')) {
                     menu.classList.remove('show');
-                    document.body.style.overflow = '';
                     adjustBannerMargin();
                 }
             });
         });
-        
+
+        // Banner change logic
         function changeBanner(direction) {
             currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
             document.getElementById('current-banner').src = banners[currentBannerIndex];
@@ -365,24 +365,25 @@
 
         startBannerRotation();
 
+        // Adjust banner margin dynamically based on header height
         function adjustBannerMargin() {
             const header = document.querySelector('header');
             const bannerContainer = document.querySelector('.banner-container');
             bannerContainer.style.marginTop = `${header.offsetHeight}px`;
         }
 
+        // Adjust the display style of the menu depending on screen size
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
-                menu.style.display = 'flex';
-            } else {
-                menu.style.display = 'none';
+                menu.classList.remove('show'); // Assicurati che il menu non sia visibile per desktop
             }
             adjustBannerMargin();
         });
 
-        // Initial adjustment
+        // Initial adjustment after page load
         adjustBannerMargin();
+    });
+</script>
 
-    </script>
 </body>
 </html>
