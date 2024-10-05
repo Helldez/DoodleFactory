@@ -307,9 +307,23 @@
         let bannerInterval;
 
         menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('show');
+            if (menu.classList.contains('show')) {
+                menu.classList.remove('show');
+            } else {
+                menu.classList.add('show');
+            }
             adjustBannerMargin();
         });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Assicurati che il menu sia nascosto quando la pagina viene caricata
+            if (window.innerWidth <= 768) {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        });
+
 
         const navLinks = document.querySelectorAll('#menu a');
         
