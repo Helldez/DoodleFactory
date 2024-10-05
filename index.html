@@ -1,158 +1,111 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doodle Factory - Illustrazioni Creative</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Doodle Factory Lab</title>
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: white;
-            color: #333;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
         }
         header {
-            background-color: white;
-            border-bottom: 1px solid #eaeaea;
-            padding: 20px;
             text-align: center;
+            padding: 2em;
         }
         header h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.5em;
-            margin: 0;
-        }
-        nav {
-            margin-top: 10px;
-        }
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-        .hero {
-            text-align: center;
-            padding: 50px 20px;
-            color: #333;
-        }
-        .hero img {
-            width: 150px;
-            height: auto;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-        .hero h1 {
             font-size: 3em;
             margin: 0;
         }
-        .description {
-            text-align: center;
-            padding: 20px;
-            font-size: 1.2em;
-            max-width: 800px;
-            margin: 0 auto;
+        header p {
+            font-size: 1.5em;
+            color: #777;
         }
-        .services {
+        .section {
             display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            padding: 40px;
-            justify-content: center;
+            align-items: center;
+            padding: 2em;
         }
-        .service {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            flex: 1;
-            padding: 30px;
-            text-align: center;
-            max-width: 350px;
-        }
-        .service img {
-            max-width: 100%;
-            height: auto;
+        .section img {
+            max-width: 300px;
             border-radius: 10px;
+            margin-right: 2em;
         }
-        .contact {
+        .section-description {
+            flex: 1;
+        }
+        .grid-section {
+            padding: 2em;
+        }
+        .grid-section h2 {
             text-align: center;
-            padding: 60px;
-            background-color: #fafafa;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1em;
+            padding: 1em;
+        }
+        .grid-item {
+            border: 1px solid #ccc;
+            padding: 1em;
+            text-align: center;
         }
         footer {
-            background-color: #333;
-            color: white;
             text-align: center;
-            padding: 20px;
-        }
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 40px 20px;
-            }
-            .hero h1 {
-                font-size: 2.5em;
-            }
-            .services {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .service {
-                max-width: 100%;
-            }
-            nav {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            nav a {
-                margin: 10px 0;
-            }
+            padding: 2em;
+            font-size: 0.9em;
+            color: #777;
+            border-top: 1px solid #ccc;
         }
     </style>
 </head>
 <body>
-    
-        <p>Qui nascono progetti, ricordi, emozioni</p>
-        <nav>
-            <a href="#">Portfolio</a>
-            
-        </nav>
+    <header>
+        <h1>Doodle Factory Lab</h1>
+        <p>Qui nascono progetti, emozioni, ricordi</p>
     </header>
-
-    <section class="hero">
-        <img src="profiloDF1.jfif" alt="Avatar dell'illustratrice">
-        
-    </section>
-
-    <section class="services">
-        <div class="service">
-            <img src="illustrazione1.jpg" alt="Illustrazione Personalizzata">
-            <h2>Illustrazioni Personalizzate</h2>
-            <p>Creiamo illustrazioni su misura per i tuoi progetti personali o commerciali.</p>
-        </div>
-        <div class="service">
-            <img src="stampe.jpg" alt="Stampe e Quadri">
-            <h2>Stampe e Quadri</h2>
-            <p>Acquista stampe di alta qualità per decorare la tua casa o il tuo ufficio.</p>
-        </div>
-        <div class="service">
-            <img src="workshop.jpg" alt="Workshop Creativi">
-            <h2>Workshop Creativi</h2>
-            <p>Partecipa ai nostri workshop e scopri come creare illustrazioni meravigliose.</p>
+    
+    <section class="section">
+        <img src="profiloDF1.jfif" alt="Profilo di Doodle Factory">
+        <div class="section-description">
+            <h2>Chi sono</h2>
+            <p>Ciao! Sono l'illustratrice dietro Doodle Factory Lab. Mi piace creare opere d'arte che siano piene di emozione, ispirazione e un tocco di magia. Ogni illustrazione è un viaggio creativo unico, disegnato con cura e amore per far sorridere grandi e piccini. Esplora il mio mondo di colori e personaggi adorabili!</p>
         </div>
     </section>
-
-    <section class="contact">
-        <h2>Contattaci</h2>
-        <p>Per richieste e commissioni, scrivi a: <a href="mailto:doodle.factory.lab@example.com">doodle.factory.lab@example.com</a></p>
-        <p>Puoi anche chiamarci al numero: +39 123 456 7890</p>
+    
+    <section class="grid-section">
+        <h2>Illustrazioni personalizzate</h2>
+        <div class="grid-container">
+            <div class="grid-item">Illustrazione 1</div>
+            <div class="grid-item">Illustrazione 2</div>
+            <div class="grid-item">Illustrazione 3</div>
+            <div class="grid-item">Illustrazione 4</div>
+        </div>
     </section>
-
+    
+    <section class="grid-section">
+        <h2>Stampe e quadri</h2>
+        <div class="grid-container">
+            <div class="grid-item">Stampa 1</div>
+            <div class="grid-item">Stampa 2</div>
+            <div class="grid-item">Stampa 3</div>
+            <div class="grid-item">Stampa 4</div>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="section-description">
+            <h2>Workshop creativi</h2>
+            <p>Partecipa ai miei workshop creativi e scopri il divertimento del disegno e della creazione! Insieme esploreremo tecniche, colori e storie per trasformare idee in arte. Che tu sia un principiante o un appassionato di illustrazioni, c'è un workshop per te!</p>
+        </div>
+    </section>
+    
     <footer>
-        <p>&copy; 2024 Doodle Factory - Tutti i diritti riservati</p>
+        <p>Contatti: doodle.factory@example.com</p>
+        <p>&copy; 2024 Doodle Factory - Tutti i diritti riservati.</p>
     </footer>
 </body>
 </html>
