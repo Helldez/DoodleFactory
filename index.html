@@ -116,13 +116,15 @@
         .illustrations {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
+            gap: 20px; /* Spaziatura ridotta per migliorare la compattezza su schermi piccoli */
             justify-content: center;
         }
+        
         .illustrations img {
-            width: 100%;
-            height: 150px; /* Puoi regolare l'altezza se necessario */
-            object-fit: cover; /* Mantiene il rapporto d'aspetto e taglia l'eccesso */
+            width: calc(100% / 2 - 20px); /* Le immagini occuperanno metà della larghezza del contenitore meno il margine */
+            max-width: 300px; /* Larghezza massima per evitare che le immagini siano troppo grandi su desktop */
+            height: auto; /* Mantiene le proporzioni corrette */
+            object-fit: cover; /* Fa sì che le immagini riempiano il contenitore senza distorsioni */
             object-position: center; /* Centra l'immagine */
             border-radius: 15px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -140,7 +142,11 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 40px;
         }
+
         @media only screen and (max-width: 768px) {
+            .illustrations img {
+                width: calc(100% - 20px); /* Le immagini occupano tutta la larghezza del contenitore su dispositivi mobili */
+            }
             header {
                 flex-direction: column;
                 align-items: flex-start;
