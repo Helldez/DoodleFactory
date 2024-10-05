@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doodle Factory Lab</title>
@@ -19,7 +17,6 @@
             text-align: center;
             padding: 20px;
             background-color: #fdfdfd;
-            
         }
         h1 {
             font-size: 3em;
@@ -34,7 +31,6 @@
             background-color: #85aab2;
             padding: 15px;
             text-align: center;
-            
             margin-top: 20px;
         }
         nav a {
@@ -50,9 +46,7 @@
         section {
             padding: 40px;
             margin: 40px 0;
-            
             background-color: #ffffff;
-            
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .about {
@@ -63,7 +57,6 @@
             width: 250px;
             height: auto;
             margin-right: 30px;
-            
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .illustrations, .prints {
@@ -92,7 +85,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 40px;
         }
-    @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
             body {
                 padding: 10px;
             }
@@ -136,7 +129,6 @@
             <a href="#live_sketches">Ritrattini dal vivo</a>
         </nav>
     </header>
-    </header>
     
     <script>
         const menuToggle = document.getElementById('menu-toggle');
@@ -158,29 +150,11 @@
             }
         });
     </script>
-    <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
-        if (window.innerWidth <= 768) {
-            menuToggle.style.display = 'block';
-            menu.style.display = 'none';
-            menuToggle.addEventListener('click', () => {
-                menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-            });
-        }
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                menuToggle.style.display = 'none';
-                menu.style.display = 'block';
-            } else {
-                menuToggle.style.display = 'block';
-                menu.style.display = 'none';
-            }
-        });
-    </script>
+    
     <div id="banner" style="width: 100%; height: 300px; overflow: hidden; margin-top: 40px; margin-bottom: 20px; text-align: center;">
         <img src="Banner4.PNG" alt="Banner" style="width: 100%; height: 300px; object-fit: cover;">
     </div>
+    
     <section id="about" style="text-align: center;">
         <img src="profiloDF1.jfif" alt="Profilo Doodle Factory" style="margin: 0 auto; display: block; width: 250px; height: 250px; border-radius: 15px; object-fit: cover;">
         <div style="margin-top: 20px;">
@@ -188,6 +162,7 @@
             <p>Ciao, sono Marina, grafica e illustratrice freelance. Doodle Factory Lab è il mio laboratorio creativo dove i ricordi prendono forma e colore.</p>
         </div>
     </section>
+    
     <section id="portraits">
         <h2>Ritratti</h2>
         <p>Realizzo ritratti personalizzati per catturare l'essenza di un momento speciale o di una persona cara. Ogni ritratto è unico e ricco di emozioni.</p>
@@ -198,6 +173,7 @@
             <img src="ritratto4.jpg" alt="Ritratto 4">
         </div>
     </section>
+    
     <section id="illustrations">
         <h2>Illustrazioni</h2>
         <p>Le mie illustrazioni sono pensate per raccontare storie, decorare ambienti e regalare un tocco di magia alla vita di tutti i giorni. Lascia che i colori diano vita alle tue idee.</p>
@@ -208,6 +184,7 @@
             <img src="illustrazione4.jpg" alt="Illustrazione 4">
         </div>
     </section>
+    
     <section id="wedding">
         <h2>Wedding</h2>
         <p>Celebra il giorno più bello con illustrazioni e decorazioni personalizzate. Dalle partecipazioni ai segnaposti, ogni dettaglio sarà speciale per rendere unico il tuo matrimonio.</p>
@@ -218,6 +195,7 @@
             <img src="wedding4.jpg" alt="Wedding 4">
         </div>
     </section>
+    
     <section id="favors">
         <h2>Bomboniere</h2>
         <p>Le bomboniere illustrate sono piccoli regali che lasciano un grande ricordo. Ogni bomboniera è pensata per rappresentare il significato dell'evento con creatività e cura.</p>
@@ -228,6 +206,7 @@
             <img src="bomboniera4.jpg" alt="Bomboniera 4">
         </div>
     </section>
+    
     <section id="live_sketches">
         <h2>Ritrattini dal vivo</h2>
         <p>Rendi speciale il tuo evento con ritrattini dal vivo. Un modo divertente e originale per intrattenere i tuoi ospiti e regalare loro un ricordo personalizzato.</p>
@@ -238,10 +217,11 @@
             <img src="live4.jpg" alt="Ritrattino dal vivo 4">
         </div>
     </section>    
+    
     <footer>
         <p>Contatti: email@example.com - Telefono: +39 123 456 789</p>
         <p>© 2024 Doodle Factory - Tutti i diritti riservati</p>
-    <p>Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
+        <p>Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
     </footer>
 </body>
 </html>
