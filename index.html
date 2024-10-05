@@ -300,95 +300,124 @@
     </footer>
 
     <script>
-        window.addEventListener('load', function() {
-            const menuToggle = document.getElementById('menu-toggle');
-            const menu = document.getElementById('menu');
-            const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
-            let currentBannerIndex = 0;
-            let bannerInterval;
+        (function() {
+            function initializeMobileMenu() {
+                const menuToggle = document.getElementById('menu-toggle');
+                const menu = document.getElementById('menu');
         
-            function toggleMenu() {
-                menu.classList.toggle('show');
-                if (menu.classList.contains('show')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
+                if (!menuToggle || !menu) {
+                    console.error('Menu elements not found');
+                    return;
                 }
-            }
         
-            menuToggle.addEventListener('click', toggleMenu);
+                function toggleMenu() {
+                    menu.classList.toggle('show');
+                    document.body.style.overflow = menu.classList.contains('show') ? 'hidden' : '';
+                }
         
-            const navLinks = document.querySelectorAll('#menu a');
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    const targetId = link.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
+                menuToggle.addEventListener('click', toggleMenu);
+        
+                const navLinks = menu.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const targetId = link.getAttribute('href').substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        
+                        if (targetElement) {
+                            const headerHeight = document.querySelector('header').offsetHeight || 0;
+                            const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
                     
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
-            
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                    
+                            if (menu.classList.contains('show')) {
+                                toggleMenu();
+                            }
+                        }
                     });
-            
-                    if (menu.classList.contains('show')) {
-                        toggleMenu();
-                    }
                 });
-            });
-            
-            function changeBanner(direction) {
-                currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
-                document.getElementById('current-banner').src = banners[currentBannerIndex];
             }
         
-            function startBannerRotation() {
-                bannerInterval = setInterval(() => changeBanner(1), 5000);
-            }
+            function initializeBannerRotation() {
+                const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
+                let currentBannerIndex = 0;
+                let bannerInterval;
         
-            function stopBannerRotation() {
-                clearInterval(bannerInterval);
-            }
+                const currentBanner = document.getElementById('current-banner');
+                const prevBanner = document.getElementById('prev-banner');
+                const nextBanner = document.getElementById('next-banner');
         
-            document.getElementById('prev-banner').addEventListener('click', () => {
-                stopBannerRotation();
-                changeBanner(-1);
+                if (!currentBanner || !prevBanner || !nextBanner) {
+                    console.error('Banner elements not found');
+                    return;
+                }
+        
+                function changeBanner(direction) {
+                    currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
+                    currentBanner.src = banners[currentBannerIndex];
+                }
+        
+                function startBannerRotation() {
+                    bannerInterval = setInterval(() => changeBanner(1), 5000);
+                }
+        
+                function stopBannerRotation() {
+                    clearInterval(bannerInterval);
+                }
+        
+                prevBanner.addEventListener('click', () => {
+                    stopBannerRotation();
+                    changeBanner(-1);
+                    startBannerRotation();
+                });
+        
+                nextBanner.addEventListener('click', () => {
+                    stopBannerRotation();
+                    changeBanner(1);
+                    startBannerRotation();
+                });
+        
                 startBannerRotation();
-            });
-        
-            document.getElementById('next-banner').addEventListener('click', () => {
-                stopBannerRotation();
-                changeBanner(1);
-                startBannerRotation();
-            });
-        
-            startBannerRotation();
+            }
         
             function handleResize() {
+                const menu = document.getElementById('menu');
+                const menuToggle = document.getElementById('menu-toggle');
+        
+                if (!menu || !menuToggle) return;
+        
                 if (window.innerWidth > 768) {
                     menu.style.display = 'flex';
                     menu.classList.remove('show');
                     document.body.style.overflow = '';
+                    menuToggle.style.display = 'none';
                 } else {
                     menu.style.display = menu.classList.contains('show') ? 'flex' : 'none';
+                    menuToggle.style.display = 'block';
                 }
             }
         
-            window.addEventListener('resize', handleResize);
+            // Wait for DOM to be ready
+            document.addEventListener('DOMContentLoaded', function() {
+                initializeMobileMenu();
+                initializeBannerRotation();
+                handleResize();
+                window.addEventListener('resize', handleResize);
+            });
         
-            // Initial setup
-            handleResize();
-        
-            // Ensure menu toggle is visible on mobile
-            if (window.innerWidth <= 768) {
-                menuToggle.style.display = 'block';
-            }
-        
-            console.log('Menu mobile inizializzato');
-        });
+            // Fallback for full page load
+            window.addEventListener('load', function() {
+                if (!document.getElementById('menu-toggle')) {
+                    console.log('Reinitializing after full page load');
+                    initializeMobileMenu();
+                    initializeBannerRotation();
+                    handleResize();
+                }
+            });
+        })();
 
     </script>
 </body>
