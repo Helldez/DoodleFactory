@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: #f9f9f9;
+            background-color: white;
             color: #333;
             margin: 0;
             padding: 0;
@@ -35,15 +35,25 @@
         }
         .hero {
             text-align: center;
-            padding: 100px 20px;
-            background-image: url('hero.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
+            padding: 50px 20px;
+            color: #333;
+        }
+        .hero img {
+            width: 150px;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 20px;
         }
         .hero h1 {
-            font-size: 3.5em;
+            font-size: 3em;
             margin: 0;
+        }
+        .description {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
         }
         .services {
             display: flex;
@@ -80,7 +90,7 @@
         /* Mobile Styles */
         @media (max-width: 768px) {
             .hero {
-                padding: 60px 20px;
+                padding: 40px 20px;
             }
             .hero h1 {
                 font-size: 2.5em;
@@ -108,14 +118,15 @@
         <h1>Doodle Factory</h1>
         <nav>
             <a href="#">Portfolio</a>
-            <a href="chi_sono.html">Chi sono</a>
-            <a href="contatti.html">Contatti</a>
+            <a href="#">Chi sono</a>
+            <a href="#">Contatti</a>
         </nav>
     </header>
 
     <section class="hero">
-        <h1>Cattura la Bellezza della Creatività</h1>
-        <p>Lasciati ispirare dalle nostre illustrazioni uniche</p>
+        <img src="avatar.png" alt="Avatar dell'illustratrice">
+        <h1>Ilaria Zanellato</h1>
+        <p>Illustratrice freelance con una passione per le immagini colorate e vivaci. Trasforma idee in opere d'arte uniche che parlano al cuore delle persone.</p>
     </section>
 
     <section class="services">
@@ -139,6 +150,7 @@
     <section class="contact">
         <h2>Contattaci</h2>
         <p>Per richieste e commissioni, scrivi a: <a href="mailto:doodle.factory.lab@example.com">doodle.factory.lab@example.com</a></p>
+        <p>Puoi anche chiamarci al numero: +39 123 456 7890</p>
     </section>
 
     <footer>
