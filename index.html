@@ -300,25 +300,35 @@
     </footer>
 
     <script>
-        (function() {
-            function initializeMobileMenu() {
-                const menuToggle = document.getElementById('menu-toggle');
-                const menu = document.getElementById('menu');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementi del DOM
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('menu');
+            const bannerContainer = document.querySelector('.banner-container');
+            const currentBanner = document.getElementById('current-banner');
+            const prevBanner = document.getElementById('prev-banner');
+            const nextBanner = document.getElementById('next-banner');
         
-                if (!menuToggle || !menu) {
-                    console.error('Menu elements not found');
-                    return;
-                }
+            // Configurazione
+            const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
+            let currentBannerIndex = 0;
+            let bannerInterval;
         
-                function toggleMenu() {
-                    menu.classList.toggle('show');
-                    document.body.style.overflow = menu.classList.contains('show') ? 'hidden' : '';
-                }
+            // Funzione per il toggle del menu
+            function toggleMenu() {
+                if (!menu) return;
+                menu.classList.toggle('show');
+                document.body.style.overflow = menu.classList.contains('show') ? 'hidden' : '';
+                adjustBannerMargin();
+            }
         
+            // Gestione del menu
+            if (menuToggle && menu) {
                 menuToggle.addEventListener('click', toggleMenu);
         
-                const navLinks = menu.querySelectorAll('a');
-                navLinks.forEach(link => {
+                // Chiudi il menu quando si clicca su un link
+                const menuLinks = menu.getElementsByTagName('a');
+                Array.from(menuLinks).forEach(link => {
                     link.addEventListener('click', (event) => {
                         event.preventDefault();
                         const targetId = link.getAttribute('href').substring(1);
@@ -333,41 +343,30 @@
                                 behavior: 'smooth'
                             });
                     
-                            if (menu.classList.contains('show')) {
-                                toggleMenu();
-                            }
+                            toggleMenu();
                         }
                     });
                 });
             }
         
-            function initializeBannerRotation() {
-                const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
-                let currentBannerIndex = 0;
-                let bannerInterval;
+            // Funzioni per la gestione dei banner
+            function changeBanner(direction) {
+                if (!currentBanner) return;
+                currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
+                currentBanner.src = banners[currentBannerIndex];
+            }
         
-                const currentBanner = document.getElementById('current-banner');
-                const prevBanner = document.getElementById('prev-banner');
-                const nextBanner = document.getElementById('next-banner');
+            function startBannerRotation() {
+                if (bannerInterval) clearInterval(bannerInterval);
+                bannerInterval = setInterval(() => changeBanner(1), 5000);
+            }
         
-                if (!currentBanner || !prevBanner || !nextBanner) {
-                    console.error('Banner elements not found');
-                    return;
-                }
+            function stopBannerRotation() {
+                if (bannerInterval) clearInterval(bannerInterval);
+            }
         
-                function changeBanner(direction) {
-                    currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
-                    currentBanner.src = banners[currentBannerIndex];
-                }
-        
-                function startBannerRotation() {
-                    bannerInterval = setInterval(() => changeBanner(1), 5000);
-                }
-        
-                function stopBannerRotation() {
-                    clearInterval(bannerInterval);
-                }
-        
+            // Gestione dei banner
+            if (prevBanner && nextBanner) {
                 prevBanner.addEventListener('click', () => {
                     stopBannerRotation();
                     changeBanner(-1);
@@ -383,10 +382,17 @@
                 startBannerRotation();
             }
         
-            function handleResize() {
-                const menu = document.getElementById('menu');
-                const menuToggle = document.getElementById('menu-toggle');
+            // Funzione per aggiustare il margine del banner
+            function adjustBannerMargin() {
+                if (!bannerContainer) return;
+                const header = document.querySelector('header');
+                if (header) {
+                    bannerContainer.style.marginTop = `${header.offsetHeight}px`;
+                }
+            }
         
+            // Funzione per gestire il ridimensionamento della finestra
+            function handleResize() {
                 if (!menu || !menuToggle) return;
         
                 if (window.innerWidth > 768) {
@@ -398,26 +404,17 @@
                     menu.style.display = menu.classList.contains('show') ? 'flex' : 'none';
                     menuToggle.style.display = 'block';
                 }
+        
+                adjustBannerMargin();
             }
         
-            // Wait for DOM to be ready
-            document.addEventListener('DOMContentLoaded', function() {
-                initializeMobileMenu();
-                initializeBannerRotation();
-                handleResize();
-                window.addEventListener('resize', handleResize);
-            });
+            // Aggiungi listener per il ridimensionamento
+            window.addEventListener('resize', handleResize);
         
-            // Fallback for full page load
-            window.addEventListener('load', function() {
-                if (!document.getElementById('menu-toggle')) {
-                    console.log('Reinitializing after full page load');
-                    initializeMobileMenu();
-                    initializeBannerRotation();
-                    handleResize();
-                }
-            });
-        })();
+            // Inizializzazione
+            handleResize();
+            adjustBannerMargin();
+        });
 
     </script>
 </body>
