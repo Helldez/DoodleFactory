@@ -310,6 +310,11 @@
         // Aggiungi l'evento di click al pulsante del menu solo quando il DOM è completamente caricato
         menuToggle.addEventListener('click', () => {
             menu.classList.toggle('show');
+            if (menu.classList.contains('show')) {
+                menu.style.display = 'flex';
+            } else {
+                menu.style.display = 'none';
+            }
             adjustBannerMargin();
         });
 
@@ -341,6 +346,7 @@
                 // Nasconde il menu mobile
                 if (menu.classList.contains('show')) {
                     menu.classList.remove('show');
+                    menu.style.display = 'none';
                     adjustBannerMargin();
                 }
             });
