@@ -118,7 +118,7 @@
     </style>
 </head>
 <body>
-    <div class="contact-bar" style="background-color: #f5d5c0; padding: 5px; text-align: center; font-size: 1.2em; max-width: 800px; margin: 0 auto;">
+    <div class="contact-bar" style="background-color: #f5d5c0; padding: 10px; text-align: center; font-size: 1.2em; width: 100%;">
         <p>Contatti: email@example.com - Telefono: +39 123 456 789 | Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
     </div>
     <header>
@@ -127,12 +127,20 @@
             <button id="menu-toggle" style="display: none; background-color: #85aab2; color: white; border: none; padding: 10px;">&#9776;</button>
         </div>
         <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
+        <nav id="menu" style="display: none; text-align: center; background-color: #85aab2; padding: 10px;">
+            <a href="#about">Chi sono</a>
+            <a href="#portraits">Ritratti</a>
+            <a href="#illustrations">Illustrazioni</a>
+            <a href="#wedding">Wedding</a>
+            <a href="#favors">Bomboniere</a>
+            <a href="#live_sketches">Ritrattini dal vivo</a>
+        </nav>
+    </header>
     </header>
     
     <script>
         const menuToggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
-        menuToggle.style.display = 'none';
         if (window.innerWidth <= 768) {
             menuToggle.style.display = 'block';
         }
@@ -170,7 +178,7 @@
         });
     </script>
     <div id="banner" style="width: 100%; height: 300px; overflow: hidden; margin-top: 40px; margin-bottom: 20px; text-align: center;">
-        <img src="banner4.PNG" alt="Banner" style="width: 100%; object-fit: cover;">
+        <img src="banner4.png" alt="Banner" style="width: 100%; height: 300px; object-fit: cover;">
     </div>
     <section id="about" style="text-align: center;">
         <img src="profiloDF1.jfif" alt="Profilo Doodle Factory" style="margin: 0 auto; display: block; width: 250px; height: 250px; border-radius: 15px; object-fit: cover;">
