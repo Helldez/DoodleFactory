@@ -2,15 +2,13 @@
 <html lang="it">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doodle Factory Lab</title>
     <style>
         body {
             background-color: #fdfdfd;
-            font-family: 'Amatic SC', cursive, sans-serif;
+            font-family: 'Amatic SC', cursive;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -32,7 +30,7 @@
         }
         nav {
             background-color: #85aab2;
-            padding: 15px; width: 100%; max-width: 1200px; margin: 0 auto; margin: 0 auto;
+            padding: 15px; width: 100%; max-width: 1200px; margin: 0 auto; box-sizing: border-box;
             text-align: center;
             
             margin-top: 20px;
@@ -53,7 +51,7 @@
             
             background-color: #ffffff;
             
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            
         }
         .about {
             display: flex;
@@ -118,10 +116,23 @@
     </style>
 </head>
 <body>
-    <div class="contact-bar" style="background-color: #f5d5c0; padding: 10px; text-align: center; font-size: 1.2em; width: 100%;">
+    <div class="contact-bar" style="background-color: #f5d5c0; padding: 10px; text-align: center; font-size: 1em; width: 100%;">
         <p>Contatti: email@example.com - Telefono: +39 123 456 789 | Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
     </div>
     <header style="text-align: center; display: flex; flex-direction: column; align-items: center; padding: 20px;">
+    <h1 style="color: #8a2b25;">Doodle Factory Lab</h1>
+    <button id="menu-toggle" style="display: none; background-color: #85aab2; color: white; border: none; padding: 10px; position: absolute; right: 20px;">&#9776;</button>
+    <h1 style="color: #8a2b25;">Doodle Factory Lab</h1>
+    <button id="menu-toggle" style="display: none; background-color: #85aab2; color: white; border: none; padding: 10px;">&#9776;</button>
+    <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
+    <nav id="menu" style="display: block; text-align: center; background-color: #85aab2; padding: 15px; width: 100%; max-width: 1200px;">
+        <a href="#about">Chi sono</a>
+        <a href="#portraits">Ritratti</a>
+        <a href="#illustrations">Illustrazioni</a>
+        <a href="#wedding">Wedding</a>
+        <a href="#favors">Bomboniere</a>
+        <a href="#live_sketches">Ritrattini dal vivo</a>
+    </nav>
         <h1 style="color: #8a2b25; margin-right: auto;">Doodle Factory Lab</h1>
 <button id="menu-toggle" style="display: none; background-color: #85aab2; color: white; border: none; padding: 10px;">&#9776;</button>
         <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
