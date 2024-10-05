@@ -306,25 +306,28 @@
         const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
         let currentBannerIndex = 0;
         let bannerInterval;
-
-        // Aggiungi l'evento di click al pulsante del menu solo quando il DOM è completamente caricato
-        menuToggle.addEventListener('click', () => {
+    
+        // Funzione per mostrare/nascondere il menu
+        function toggleMenu() {
             menu.classList.toggle('show');
             if (menu.classList.contains('show')) {
-                menu.style.display = 'flex';
+                menu.style.display = 'flex'; // Mostra il menu
             } else {
-                menu.style.display = 'none';
+                menu.style.display = 'none'; // Nascondi il menu
             }
             adjustBannerMargin();
-        });
-
-        // Assicura che il menu sia nascosto su dispositivi mobili al primo caricamento
+        }
+    
+        // Aggiungi l'evento di click al pulsante del menu
+        menuToggle.addEventListener('click', toggleMenu);
+    
+        // Nascondi il menu su dispositivi mobili al primo caricamento
         if (window.innerWidth <= 768) {
             menu.style.display = 'none';
         } else {
             menu.style.display = 'flex';
         }
-
+    
         // Aggiungi eventi di click ai link di navigazione per il comportamento del menu mobile
         const navLinks = document.querySelectorAll('#menu a');
         navLinks.forEach(link => {
@@ -332,24 +335,31 @@
                 event.preventDefault(); // Previene il comportamento di default del link
                 const targetId = link.getAttribute('href').substring(1); // Ottiene l'id della sezione
                 const targetElement = document.getElementById(targetId); // Seleziona l'elemento target
-
+    
                 // Calcola la posizione rispetto all'inizio della pagina
                 const headerHeight = document.querySelector('header').offsetHeight;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
-
+    
                 // Scorrimento fluido con offset corretto
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
-
-                // Nasconde il menu mobile
-                if (menu.classList.contains('show')) {
-                    menu.classList.remove('show');
-                    menu.style.display = 'none';
-                    adjustBannerMargin();
+    
+                // Nasconde il menu mobile dopo aver cliccato un link
+                if (window.innerWidth <= 768 && menu.classList.contains('show')) {
+                    toggleMenu(); // Usa la funzione per nascondere il menu
                 }
             });
+        });
+    
+        // Aggiungi un listener per gestire il ridimensionamento della finestra
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                menu.style.display = 'flex'; // Mostra il menu se la larghezza è superiore a 768px
+            } else if (!menu.classList.contains('show')) {
+                menu.style.display = 'none'; // Nascondi il menu se non è aperto e siamo su dispositivi mobili
+            }
         });
 
         
