@@ -216,7 +216,13 @@
         <img src="profiloDF1.jfif" alt="Profilo Doodle Factory" style="margin: 0 auto; display: block; width: 250px; height: 250px; border-radius: 15px; object-fit: cover;">
         <div style="margin-top: 20px;">
             <h2>Chi sono</h2>
-            <p>Ciao, sono Marina, grafica e illustratrice freelance. Doodle Factory Lab è il mio laboratorio creativo dove i ricordi prendono forma e colore.</p>
+            <p>Ciao, che bello che sei qui! <p> 
+            Sono Marina, grafica e illustratrice freelance. 
+            Doodle Factory Lab è il mio laboratorio creativo, dove ricordi ed emozioni prendono forma e colore. 
+            Sono nata in una notte tempestosa d’estate sotto il segno del Cancro, amo la cioccolata, l’arte in tutte le sue forme e tutto ciò che richiede manualità. 
+            Col tempo, ho capito che ciò che amo fare di più è disegnare e avere sempre qualcosa di nuovo su cui lavorare. Nel mio lab impacchetto tra fiori essiccati, nastri e un bel pó di sano disordine creativo. 
+            Qui puoi trovare Ritratti e Illustrazioni personalizzati, bigliettini d’auguri, tag, bomboniere con un tocco artistico, coordinati grafici per qualsiasi tipo di evento e, se hai un brand o un’azienda, posso aiutarti tramite progetti illustrati su misura per te. 
+            Prenditi pure un po’ di tempo per curiosare….</p>
         </div>
     </section>
 
@@ -294,6 +300,27 @@
             adjustBannerMargin();
         });
 
+        const navLinks = document.querySelectorAll('#menu a');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // Previene il comportamento di default del link
+                const targetId = link.getAttribute('href').substring(1); // Ottiene l'id della sezione
+                const targetElement = document.getElementById(targetId); // Seleziona l'elemento target
+        
+                // Esegue uno scroll fluido verso l'elemento target
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+                // Nasconde il menu mobile e ripristina lo scrolling del corpo
+                if (menu.classList.contains('show')) {
+                    menu.classList.remove('show');
+                    document.body.style.overflow = '';
+                    adjustBannerMargin();
+                }
+            });
+        });
+
+        
         function changeBanner(direction) {
             currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
             document.getElementById('current-banner').src = banners[currentBannerIndex];
