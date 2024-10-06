@@ -28,6 +28,8 @@
         height: 80px;
         padding: 0 20px;
         transition: top 0.3s ease-in-out;
+        top: 50px; /* Assicurati che questo valore sia uguale all'altezza del #top-banner */
+        margin-top: 0; /* Rimuovi qualsiasi margine superiore *
     }
     header.banner-hidden {
         top: 0;
@@ -186,6 +188,7 @@
         align-items: center;
         justify-content: center;
         transition: transform 0.3s ease-in-out;
+        height: 50px;
     }
     #top-banner.hidden {
         transform: translateY(-100%);
@@ -208,7 +211,7 @@
             align-items: flex-start;
             height: auto;
             padding: 10px 20px;
-            top: 60px; /* Maggiore spazio per il banner su mobile */
+            top: 50px;
         }
         nav {
             display: none;
@@ -242,7 +245,7 @@
             right: 10px;
         }
         .banner-container {
-            margin-top: 160px; /* Spazio aggiustato per mobile */
+            margin-top: 140px; /* Spazio aggiustato per mobile
         }
         .banner-container.banner-hidden {
             margin-top: 100px;
