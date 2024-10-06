@@ -62,15 +62,31 @@
         }
         #menu-toggle {
             display: none;
-            background-color: #85aab2;
-            color: white;
+            background-color: transparent;
             border: none;
-            padding: 10px;
             font-size: 2em;
-            transition: transform 0.3s ease;
+            cursor: pointer;
+            z-index: 1002;
         }
-        #menu-toggle.show {
-            transform: rotate(90deg);
+        .menu-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .menu-icon div {
+            width: 30px;
+            height: 3px;
+            background-color: #8a2b25;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        #menu-toggle.open .menu-icon div:nth-child(1) {
+            transform: rotate(45deg) translateY(8px);
+        }
+        #menu-toggle.open .menu-icon div:nth-child(2) {
+            opacity: 0;
+        }
+        #menu-toggle.open .menu-icon div:nth-child(3) {
+            transform: rotate(-45deg) translateY(-8px);
         }
         .banner-container {
             position: relative;
@@ -121,16 +137,16 @@
         .illustrations {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px; /* Spaziatura ridotta per migliorare la compattezza su schermi piccoli */
+            gap: 20px;
             justify-content: center;
         }
         
         .illustrations img {
-            width: calc(100% / 2 - 20px); /* Le immagini occuperanno metà della larghezza del contenitore meno il margine */
-            max-width: 300px; /* Larghezza massima per evitare che le immagini siano troppo grandi su desktop */
-            height: auto; /* Mantiene le proporzioni corrette */
-            object-fit: cover; /* Fa sì che le immagini riempiano il contenitore senza distorsioni */
-            object-position: center; /* Centra l'immagine */
+            width: calc(100% / 2 - 20px);
+            max-width: 300px;
+            height: auto;
+            object-fit: cover;
+            object-position: center;
             border-radius: 15px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
@@ -151,7 +167,7 @@
 
         @media only screen and (max-width: 768px) {
             .illustrations img {
-                width: calc(100% - 20px); /* Le immagini occupano tutta la larghezza del contenitore su dispositivi mobili */
+                width: calc(100% - 20px);
             }
             header {
                 flex-direction: column;
@@ -189,7 +205,6 @@
                 position: absolute;
                 top: 10px;
                 right: 10px;
-                z-index: 1002;
             }
             .banner-container {
                 margin-top: 100px;
@@ -209,7 +224,13 @@
             <h1>Doodle Factory Lab</h1>
             <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
         </div>
-        <button id="menu-toggle"><i class="fas fa-bars"></i></button>
+        <button id="menu-toggle">
+            <div class="menu-icon">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </button>
         <nav id="menu">
             <a href="#about">Chi sono</a>
             <a href="#portraits">Ritratti</a>
@@ -316,7 +337,7 @@
         // Menu toggle click listener
         menuToggle.addEventListener('click', () => {
             menu.classList.toggle('show');
-            menuToggle.classList.toggle('show');
+            menuToggle.classList.toggle('open');
             adjustBannerMargin();
         });
 
@@ -339,7 +360,7 @@
                 // Hide mobile menu after clicking a link
                 if (menu.classList.contains('show')) {
                     menu.classList.remove('show');
-                    menuToggle.classList.remove('show');
+                    menuToggle.classList.remove('open');
                     adjustBannerMargin();
                 }
             });
@@ -383,8 +404,8 @@
         // Adjust the display style of the menu depending on screen size
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
-                menu.classList.remove('show'); // Assicurati che il menu non sia visibile per desktop
-                menuToggle.classList.remove('show');
+                menu.classList.remove('show');
+                menuToggle.classList.remove('open');
             }
             adjustBannerMargin();
         });
