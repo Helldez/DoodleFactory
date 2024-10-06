@@ -225,7 +225,7 @@
                 right: 10px;
             }
             .banner-container {
-                margin-top: 120px;
+                margin-top: 70px;
             }
             section h2 {
                 font-size: 2.2em;
@@ -269,7 +269,7 @@
     </div>
 
     <section id="about">
-        <img src="profiloDF1.jfif" alt="Profilo Doodle Factory" style="margin: 0 auto; display: block; width: 250px; height: 250px; border-radius: 15px; object-fit: cover;">
+        <img src="chi_sono.jfif" alt="Profilo Doodle Factory" style="margin: 0 auto; display: block; width: 250px; height: 250px; border-radius: 15px; object-fit: cover;">
         <div style="margin-top: 20px;">
             <h2>Chi sono</h2>
             <p>Ciao, che bello che sei qui! </p>
@@ -282,70 +282,7 @@
         </div>
     </section>
 
-    <section id="portraits">
-        <h2>Ritratti</h2>
-        <p>I ritratti sono sempre mezzobusto e abbracciati, le linee sono morbide e tondeggianti. Sullo sfondo si possono aggiungere una breve frase o piccoli pattern. </p>
-        <p>Per realizzarli ho bisogno di due foto per soggetto, non importa che sia una foto di gruppo, bastano due primi piani in cui si vedono bene volto e capelli. </p>
-        <p>Confrontarci, raccontarci e dare un’anima al progetto sarà fondamentale per entrare in empatia e far sì che il risultato ti emozioni.</p>
-        <p>Il ritratto è stampato su carta biologica 300gr, il formato è unico, 20x29 con cornice, bianca e in legno.</p>
-        <p>I miei progetti hanno bisogno di tempo, comunicami la data massima di consegna e io la rispetterò.</p>
-        <div class="illustrations">
-            <img src="Ritratto1.jfif" alt="Ritratto 1">
-            <img src="Ritratto2.jfif" alt="Ritratto 2">
-            <img src="Ritratto3.jfif" alt="Ritratto 3">
-            <img src="Ritratto4.jfif" alt="Ritratto 4">
-        </div>
-    </section>
-
-    <section id="illustrations">
-        <h2>Illustrazioni</h2>
-        <p>Le mie illustrazioni sono pensate per raccontare storie, decorare ambienti e regalare un tocco di magia alla vita di tutti i giorni. Lascia che i colori diano vita alle tue idee.</p>
-        <div class="illustrations">
-            <img src="illustrazione1.jpg" alt="Illustrazione 1">
-            <img src="illustrazione2.jpg" alt="Illustrazione 2">
-            <img src="illustrazione3.jpg" alt="Illustrazione 3">
-            <img src="illustrazione4.jpg" alt="Illustrazione 4">
-        </div>
-    </section>
-
-    <section id="wedding">
-        <h2>Wedding</h2>
-        <p>Celebra il giorno più bello con illustrazioni e decorazioni personalizzate. Dalle partecipazioni ai segnaposti, ogni dettaglio sarà speciale per rendere unico il tuo matrimonio.</p>
-        <div class="illustrations">
-            <img src="wedding1.jpg" alt="Wedding 1">
-            <img src="wedding2.jpg" alt="Wedding 2">
-            <img src="wedding3.jpg" alt="Wedding 3">
-            <img src="wedding4.jpg" alt="Wedding 4">
-        </div>
-    </section>
-
-    <section id="favors">
-        <h2>Bomboniere</h2>
-        <p>Le bomboniere illustrate sono piccoli regali che lasciano un grande ricordo. Ogni bomboniera è pensata per rappresentare il significato dell'evento con creatività e cura.</p>
-        <div class="illustrations">
-            <img src="bomboniera1.jpg" alt="Bomboniera 1">
-            <img src="bomboniera2.jpg" alt="Bomboniera 2">
-            <img src="bomboniera3.jpg" alt="Bomboniera 3">
-            <img src="bomboniera4.jpg" alt="Bomboniera 4">
-        </div>
-    </section>
-
-    <section id="live_sketches">
-        <h2>Ritrattini dal vivo</h2>
-        <p>Rendi speciale il tuo evento con ritrattini dal vivo. Un modo divertente e originale per intrattenere i tuoi ospiti e regalare loro un ricordo personalizzato.</p>
-        <div class="illustrations">
-            <img src="live1.jpg" alt="Ritrattino dal vivo 1">
-            <img src="live2.jpg" alt="Ritrattino dal vivo 2">
-            <img src="live3.jpg" alt="Ritrattino dal vivo 3">
-            <img src="live4.jpg" alt="Ritrattino dal vivo 4">
-        </div>
-    </section>  
-
-    <footer>
-        <p>Contatti: email@example.com - Telefono: +39 123 456 789</p>
-        <p>© 2024 Doodle Factory - Tutti i diritti riservati</p>
-        <p>Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
-    </footer>
+    <!-- Script to handle the menu and banner functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const menuToggle = document.getElementById('menu-toggle');
@@ -420,7 +357,7 @@
             function adjustBannerMargin() {
                 const header = document.querySelector('header');
                 const bannerContainer = document.querySelector('.banner-container');
-                bannerContainer.style.marginTop = `${header.offsetHeight}px`;
+                bannerContainer.style.marginTop = `${header.offsetHeight - 1}px`;
             }
 
             // Adjust the display style of the menu depending on screen size
