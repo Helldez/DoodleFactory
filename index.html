@@ -6,217 +6,255 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doodle Factory Lab</title>
-    <style>
-        body {
-            background-color: #fdfdfd;
-            font-family: 'Amatic SC', cursive;
-            margin: 0;
-            padding: 0;
-            text-align: center;
+<style>
+    body {
+        background-color: #fdfdfd;
+        font-family: 'Amatic SC', cursive;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    header {
+        background-color: #f5d5c0;
+        position: fixed;
+        top: 50px; /* Spazio per il banner */
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        opacity: 0.95;
+        height: 80px;
+        padding: 0 20px;
+        transition: top 0.3s ease-in-out;
+    }
+    header.banner-hidden {
+        top: 0;
+    }
+    header .title-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    header h1 {
+        font-size: 2.5em;
+        color: #cb1d1d;
+        margin: 0;
+    }
+    header p.slogan {
+        font-size: 1.4em;
+        color: #cb1d1d;
+        margin: 0;
+        font-weight: bold;
+    }
+    nav {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        height: 100%;
+    }
+    nav a {
+        color: #cb1d1d;
+        text-decoration: none;
+        font-size: 1.4em;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    nav a:hover {
+        color: #e94f37;
+    }
+    #menu-toggle {
+        display: none;
+        background-color: transparent;
+        border: none;
+        font-size: 2em;
+        cursor: pointer;
+        z-index: 1002;
+    }
+    .menu-icon {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    .menu-icon div {
+        width: 30px;
+        height: 3px;
+        background-color: #cb1d1d;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    #menu-toggle.open .menu-icon div:nth-child(1) {
+        transform: rotate(45deg) translateY(8px);
+    }
+    #menu-toggle.open .menu-icon div:nth-child(2) {
+        opacity: 0;
+    }
+    #menu-toggle.open .menu-icon div:nth-child(3) {
+        transform: rotate(-45deg) translateY(-8px);
+    }
+    .banner-container {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        overflow: hidden;
+        margin-top: 130px; /* Spazio per header + banner */
+        transition: margin-top 0.3s ease-in-out;
+    }
+    .banner-container.banner-hidden {
+        margin-top: 80px;
+    }
+    .banner-container img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+    }
+    .banner-arrow {
+        position: absolute;
+        top: 50%;
+        width: 50px;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        font-size: 2em;
+        cursor: pointer;
+        transform: translateY(-50%);
+        z-index: 100;
+    }
+    .banner-arrow.left {
+        left: 10px;
+    }
+    .banner-arrow.right {
+        right: 10px;
+    }
+    section {
+        padding: 40px;
+        margin: 40px 0;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    section h2 {
+        font-size: 2.5em;
+        color: #cb1d1d;
+    }
+    section p {
+        font-size: 1.4em;
+        color: #333;
+        line-height: 1.4;
+    }
+    .illustrations {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    .illustrations img {
+        width: calc(100% / 2 - 20px);
+        max-width: 300px;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+    .illustrations img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    footer {
+        text-align: center;
+        padding: 30px;
+        font-size: 1.4em;
+        color: #cb1d1d;
+        background-color: #f5d5c0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 40px;
+    }
+    #top-banner {
+        background-color: #cb1d1d;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2000;
+        font-size: 1.4em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease-in-out;
+    }
+    #top-banner.hidden {
+        transform: translateY(-100%);
+    }
+    #close-banner {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2em;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .illustrations img {
+            width: calc(100% - 20px);
         }
         header {
+            flex-direction: column;
+            align-items: flex-start;
+            height: auto;
+            padding: 10px 20px;
+            top: 60px; /* Maggiore spazio per il banner su mobile */
+        }
+        nav {
+            display: none;
+            flex-direction: column;
             background-color: #f5d5c0;
+            width: 100%;
+            padding: 10px 0;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000;
+            bottom: 0;
+            z-index: 1001;
+            overflow-y: auto;
+            gap: 15px;
+        }
+        nav.show {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            opacity: 0.95;
-            height: 80px;
-            padding: 0 20px;
-        }
-        header .title-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        header h1 {
-            font-size: 2.5em;
-            color: #cb1d1d;
-            margin: 0;
-        }
-        header p.slogan {
-            font-size: 1.4em;
-            color: #cb1d1d;
-            margin: 0;
-            font-weight: bold;
-        }
-        nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            height: 100%;
         }
         nav a {
-            color: #cb1d1d;
-            text-decoration: none;
-            font-size: 1.4em;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-        nav a:hover {
-            color: #e94f37;
+            padding: 15px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+            font-size: 1.8em;
         }
         #menu-toggle {
-            display: none;
-            background-color: transparent;
-            border: none;
-            font-size: 2em;
-            cursor: pointer;
-            z-index: 1002;
-        }
-        .menu-icon {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .menu-icon div {
-            width: 30px;
-            height: 3px;
-            background-color: #cb1d1d;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-        #menu-toggle.open .menu-icon div:nth-child(1) {
-            transform: rotate(45deg) translateY(8px);
-        }
-        #menu-toggle.open .menu-icon div:nth-child(2) {
-            opacity: 0;
-        }
-        #menu-toggle.open .menu-icon div:nth-child(3) {
-            transform: rotate(-45deg) translateY(-8px);
-        }
-        .banner-container {
-            position: relative;
-            width: 100%;
-            height: 500px;
-            overflow: hidden;
-            margin-top: 80px;
-        }
-        .banner-container img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-        }
-        .banner-arrow {
+            display: block;
             position: absolute;
-            top: 50%;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            font-size: 2em;
-            cursor: pointer;
-            transform: translateY(-50%);
-            z-index: 100;
-        }
-        .banner-arrow.left {
-            left: 10px;
-        }
-        .banner-arrow.right {
+            top: 10px;
             right: 10px;
         }
-        section {
-            padding: 40px;
-            margin: 40px 0;
-            background-color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .banner-container {
+            margin-top: 160px; /* Spazio aggiustato per mobile */
+        }
+        .banner-container.banner-hidden {
+            margin-top: 100px;
         }
         section h2 {
-            font-size: 2.5em;
-            color: #cb1d1d;
+            font-size: 2.2em;
         }
         section p {
-            font-size: 1.4em;
-            color: #333;
-            line-height: 1.4;
+            font-size: 1.6em;
         }
-        .illustrations {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        
-        .illustrations img {
-            width: calc(100% / 2 - 20px);
-            max-width: 300px;
-            height: auto;
-            object-fit: cover;
-            object-position: center;
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-        .illustrations img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            font-size: 1.4em;
-            color: #cb1d1d;
-            background-color: #f5d5c0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
-        }
-
-        @media only screen and (max-width: 768px) {
-            .illustrations img {
-                width: calc(100% - 20px);
-            }
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                height: auto;
-                padding: 10px 20px;
-            }
-            nav {
-                display: none;
-                flex-direction: column;
-                background-color: #f5d5c0;
-                width: 100%;
-                padding: 10px 0;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                z-index: 1001;
-                overflow-y: auto;
-                gap: 15px;
-            }
-            nav.show {
-                display: flex;
-            }
-            nav a {
-                padding: 15px 20px;
-                width: 100%;
-                box-sizing: border-box;
-                text-align: left;
-                font-size: 1.8em;
-            }
-            #menu-toggle {
-                display: block;
-                position: absolute;
-                top: 10px;
-                right: 10px;
-            }
-            .banner-container {
-                margin-top: 100px;
-            }
-            section h2 {
-                font-size: 2.2em;
-            }
-            section p {
-                font-size: 1.6em;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 
     <div id="top-banner" style="background-color: #cb1d1d; color: white; text-align: center; padding: 10px; position: fixed; top: 0; left: 0; right: 0; z-index: 2000; font-size: 1.4em; display: flex; align-items: center; justify-content: center;">
@@ -337,26 +375,31 @@
         <p>Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
     </footer>
 
-
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
         const topBanner = document.getElementById('top-banner');
         const closeBanner = document.getElementById('close-banner');
-        closeBanner.addEventListener('click', () => {
-            topBanner.style.display = 'none';
-        });
         const menuToggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
+        const header = document.querySelector('header');
+        const bannerContainer = document.querySelector('.banner-container');
         const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
         let currentBannerIndex = 0;
         let bannerInterval;
 
-        // Menu toggle click listener
+        closeBanner.addEventListener('click', () => {
+            topBanner.classList.add('hidden');
+            header.classList.add('banner-hidden');
+            bannerContainer.classList.add('banner-hidden');
+            adjustBannerMargin();
+        });
+
         menuToggle.addEventListener('click', () => {
             menu.classList.toggle('show');
             menuToggle.classList.toggle('open');
             adjustBannerMargin();
         });
 
-        // Navigation link smooth scroll
         const navLinks = document.querySelectorAll('#menu a');
         navLinks.forEach(link => {
             link.addEventListener('click', (event) => {
@@ -364,15 +407,16 @@
                 const targetId = link.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
                 
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+                const headerHeight = header.offsetHeight;
+                const bannerHeight = topBanner.offsetHeight;
+                const offset = topBanner.classList.contains('hidden') ? headerHeight : headerHeight + bannerHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
                 
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
                 
-                // Hide mobile menu after clicking a link
                 if (menu.classList.contains('show')) {
                     menu.classList.remove('show');
                     menuToggle.classList.remove('open');
@@ -381,7 +425,6 @@
             });
         });
 
-        // Banner change logic
         function changeBanner(direction) {
             currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
             document.getElementById('current-banner').src = banners[currentBannerIndex];
@@ -409,14 +452,13 @@
 
         startBannerRotation();
 
-        // Adjust banner margin dynamically based on header height
         function adjustBannerMargin() {
-            const header = document.querySelector('header');
-            const bannerContainer = document.querySelector('.banner-container');
-            bannerContainer.style.marginTop = `${header.offsetHeight}px`;
+            const headerHeight = header.offsetHeight;
+            const bannerHeight = topBanner.offsetHeight;
+            const totalHeight = headerHeight + (topBanner.classList.contains('hidden') ? 0 : bannerHeight);
+            bannerContainer.style.marginTop = `${totalHeight}px`;
         }
 
-        // Adjust the display style of the menu depending on screen size
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 menu.classList.remove('show');
@@ -425,10 +467,8 @@
             adjustBannerMargin();
         });
 
-        // Initial adjustment after page load
         adjustBannerMargin();
 
-        // Image gallery functionality
         const illustrationImages = document.querySelectorAll('.illustrations img');
         illustrationImages.forEach(img => {
             img.addEventListener('click', () => {
