@@ -1,389 +1,164 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doodle Factory Lab</title>
-    <style>
-        body {
-            background-color: #fdfdfd;
-            font-family: 'Amatic SC', cursive;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        header {
-            background-color: #f5d5c0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            opacity: 0.95;
-            height: 80px;
-            padding: 0 20px;
-        }
-        header .title-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        header h1 {
-            font-size: 2.5em;
-            color: #8a2b25;
-            margin: 0;
-        }
-        header p.slogan {
-            font-size: 1.4em;
-            color: #5f8aa5;
-            margin: 0;
-            font-weight: bold;
-        }
-        nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            height: 100%;
-        }
-        nav a {
-            color: #8a2b25;
-            text-decoration: none;
-            font-size: 1.4em;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-        nav a:hover {
-            color: #e94f37;
-        }
-        #menu-toggle {
-            display: none;
-            background-color: #85aab2;
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 2em;
-        }
-        .banner-container {
-            position: relative;
-            width: 100%;
-            height: 500px;
-            overflow: hidden;
-            margin-top: 80px;
-        }
-        .banner-container img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-        }
-        .banner-arrow {
-            position: absolute;
-            top: 50%;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            font-size: 2em;
-            cursor: pointer;
-            transform: translateY(-50%);
-            z-index: 100;
-        }
-        .banner-arrow.left {
-            left: 10px;
-        }
-        .banner-arrow.right {
-            right: 10px;
-        }
-        section {
-            padding: 40px;
-            margin: 40px 0;
-            background-color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        section h2 {
-            font-size: 2.5em;
-            color: #8a2b25;
-        }
-        section p {
-            font-size: 1.4em;
-            color: #333;
-            line-height: 1.4;
-        }
-        .illustrations {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px; /* Spaziatura ridotta per migliorare la compattezza su schermi piccoli */
-            justify-content: center;
-        }
-        
-        .illustrations img {
-            width: calc(100% / 2 - 20px); /* Le immagini occuperanno metà della larghezza del contenitore meno il margine */
-            max-width: 300px; /* Larghezza massima per evitare che le immagini siano troppo grandi su desktop */
-            height: auto; /* Mantiene le proporzioni corrette */
-            object-fit: cover; /* Fa sì che le immagini riempiano il contenitore senza distorsioni */
-            object-position: center; /* Centra l'immagine */
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .illustrations img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            font-size: 1.4em;
-            color: #8a2b25;
-            background-color: #f5d5c0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
-        }
+import React, { useState, useEffect } from 'react';
+import './App.css';
 
-        @media only screen and (max-width: 768px) {
-            .illustrations img {
-                width: calc(100% - 20px); /* Le immagini occupano tutta la larghezza del contenitore su dispositivi mobili */
-            }
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                height: auto;
-                padding: 10px 20px;
-            }
-            nav {
-                display: none;
-                flex-direction: column;
-                background-color: #f5d5c0;
-                width: 100%;
-                padding: 10px 0;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                z-index: 1001;
-                overflow-y: auto;
-                gap: 15px;
-            }
-            nav.show {
-                display: flex;
-            }
-            nav a {
-                padding: 15px 20px;
-                width: 100%;
-                box-sizing: border-box;
-                text-align: left;
-                font-size: 1.8em;
-            }
-            #menu-toggle {
-                display: block;
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                z-index: 1002;
-            }
-            .banner-container {
-                margin-top: 100px;
-            }
-            section h2 {
-                font-size: 2.2em;
-            }
-            section p {
-                font-size: 1.6em;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="title-container">
-            <h1>Doodle Factory Lab</h1>
-            <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
+const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
+
+const App = () => {
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
+  const [bannerInterval, setBannerInterval] = useState(null);
+
+  useEffect(() => {
+    // Start banner rotation on component mount
+    startBannerRotation();
+
+    // Cleanup on component unmount
+    return () => stopBannerRotation();
+  }, []);
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
+
+  const changeBanner = (direction) => {
+    setCurrentBannerIndex((prevIndex) => (prevIndex + direction + banners.length) % banners.length);
+  };
+
+  const startBannerRotation = () => {
+    stopBannerRotation();
+    const interval = setInterval(() => changeBanner(1), 5000);
+    setBannerInterval(interval);
+  };
+
+  const stopBannerRotation = () => {
+    if (bannerInterval) {
+      clearInterval(bannerInterval);
+    }
+  };
+
+  const handleNavLinkClick = (targetId) => {
+    const targetElement = document.getElementById(targetId);
+    const headerHeight = document.querySelector('header').offsetHeight;
+    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+
+    // Hide menu after clicking a link
+    setMenuVisible(false);
+  };
+
+  return (
+    <div className="App">
+      <header className={`header ${menuVisible ? 'menu-visible' : ''}`}>
+        <div className="title-container">
+          <h1>Doodle Factory Lab</h1>
+          <p className="slogan">Qui nascono progetti, emozioni, ricordi</p>
         </div>
-        <button id="menu-toggle">&#9776;</button>
-        <nav id="menu">
-            <a href="#about">Chi sono</a>
-            <a href="#portraits">Ritratti</a>
-            <a href="#illustrations">Illustrazioni</a>
-            <a href="#wedding">Wedding</a>
-            <a href="#favors">Bomboniere</a>
-            <a href="#live_sketches">Ritrattini dal vivo</a>
+        <button id="menu-toggle" className="menu-toggle" onClick={toggleMenu}>
+          &#9776;
+        </button>
+        <nav className={`menu ${menuVisible ? 'show' : ''}`}>
+          {['about', 'portraits', 'illustrations', 'wedding', 'favors', 'live_sketches'].map((section) => (
+            <a key={section} href={`#${section}`} onClick={() => handleNavLinkClick(section)}>
+              {section.charAt(0).toUpperCase() + section.slice(1).replace('_', ' ')}
+            </a>
+          ))}
         </nav>
-    </header>
+      </header>
 
-    <div class="banner-container">
-        <img src="Banner3.PNG" alt="Banner 1" id="current-banner">
-        <button class="banner-arrow left" id="prev-banner">&#9664;</button>
-        <button class="banner-arrow right" id="next-banner">&#9654;</button>
-    </div>
+      <div className="banner-container">
+        <img src={banners[currentBannerIndex]} alt="Banner" id="current-banner" />
+        <button className="banner-arrow left" onClick={() => changeBanner(-1)}>&#9664;</button>
+        <button className="banner-arrow right" onClick={() => changeBanner(1)}>&#9654;</button>
+      </div>
 
-    <section id="about">
-        <img src="profiloDF1.jfif" alt="Profilo Doodle Factory" style="margin: 0 auto; display: block; width: 250px; height: 250px; border-radius: 15px; object-fit: cover;">
-        <div style="margin-top: 20px;">
-            <h2>Chi sono</h2>
-            <p>Ciao, che bello che sei qui! </p>
-            <p>Sono Marina, grafica e illustratrice freelance.</p>
-            <p>Doodle Factory Lab è il mio laboratorio creativo, dove ricordi ed emozioni prendono forma e colore.</p> 
-            <p>Sono nata in una notte tempestosa d’estate sotto il segno del Cancro, amo la cioccolata, l’arte in tutte le sue forme e tutto ciò che richiede manualità.</p>  
-            <p>Col tempo, ho capito che ciò che amo fare di più è disegnare e avere sempre qualcosa di nuovo su cui lavorare. Nel mio lab impacchetto tra fiori essiccati, nastri e un bel pó di sano disordine creativo.</p>  
-            <p>Qui puoi trovare Ritratti e Illustrazioni personalizzate, bigliettini d’auguri, tag, bomboniere con un tocco artistico, coordinati grafici per qualsiasi tipo di evento e, se hai un brand o un’azienda, posso aiutarti tramite progetti illustrati su misura per te. 
-            Prenditi pure un po’ di tempo per curiosare….</p>
-        </div>
-    </section>
+      {['about', 'portraits', 'illustrations', 'wedding', 'favors', 'live_sketches'].map((section) => (
+        <Section key={section} sectionId={section} />
+      ))}
 
-    <section id="portraits">
-        <h2>Ritratti</h2>
-        <p>I ritratti sono sempre mezzobusto e abbracciati, le linee sono morbide e tondeggianti. Sullo sfondo si possono aggiungere una breve frase o piccoli pattern. </p>
-        <p>Per realizzarli ho bisogno di due foto per soggetto, non importa che sia una foto di gruppo, bastano due primi piani in cui si vedono bene volto e capelli. </p>
-        <p>Confrontarci, raccontarci e dare un’anima al progetto sarà fondamentale per entrare in empatia e far sì che il risultato ti emozioni.</p>
-        <p>Il ritratto è stampato su carta biologica 300gr, il formato è unico, 20x29 con cornice, bianca e in legno.</p>
-        <p>I miei progetti hanno bisogno di tempo, comunicami la data massima di consegna e io la rispetterò.</p>
-        <div class="illustrations">
-            <img src="Ritratto1.jfif" alt="Ritratto 1">
-            <img src="Ritratto2.jfif" alt="Ritratto 2">
-            <img src="Ritratto3.jfif" alt="Ritratto 3">
-            <img src="Ritratto4.jfif" alt="Ritratto 4">
-        </div>
-    </section>
-
-    <section id="illustrations">
-        <h2>Illustrazioni</h2>
-        <p>Le mie illustrazioni sono pensate per raccontare storie, decorare ambienti e regalare un tocco di magia alla vita di tutti i giorni. Lascia che i colori diano vita alle tue idee.</p>
-        <div class="illustrations">
-            <img src="illustrazione1.jpg" alt="Illustrazione 1">
-            <img src="illustrazione2.jpg" alt="Illustrazione 2">
-            <img src="illustrazione3.jpg" alt="Illustrazione 3">
-            <img src="illustrazione4.jpg" alt="Illustrazione 4">
-        </div>
-    </section>
-
-    <section id="wedding">
-        <h2>Wedding</h2>
-        <p>Celebra il giorno più bello con illustrazioni e decorazioni personalizzate. Dalle partecipazioni ai segnaposti, ogni dettaglio sarà speciale per rendere unico il tuo matrimonio.</p>
-        <div class="illustrations">
-            <img src="wedding1.jpg" alt="Wedding 1">
-            <img src="wedding2.jpg" alt="Wedding 2">
-            <img src="wedding3.jpg" alt="Wedding 3">
-            <img src="wedding4.jpg" alt="Wedding 4">
-        </div>
-    </section>
-
-    <section id="favors">
-        <h2>Bomboniere</h2>
-        <p>Le bomboniere illustrate sono piccoli regali che lasciano un grande ricordo. Ogni bomboniera è pensata per rappresentare il significato dell'evento con creatività e cura.</p>
-        <div class="illustrations">
-            <img src="bomboniera1.jpg" alt="Bomboniera 1">
-            <img src="bomboniera2.jpg" alt="Bomboniera 2">
-            <img src="bomboniera3.jpg" alt="Bomboniera 3">
-            <img src="bomboniera4.jpg" alt="Bomboniera 4">
-        </div>
-    </section>
-
-    <section id="live_sketches">
-        <h2>Ritrattini dal vivo</h2>
-        <p>Rendi speciale il tuo evento con ritrattini dal vivo. Un modo divertente e originale per intrattenere i tuoi ospiti e regalare loro un ricordo personalizzato.</p>
-        <div class="illustrations">
-            <img src="live1.jpg" alt="Ritrattino dal vivo 1">
-            <img src="live2.jpg" alt="Ritrattino dal vivo 2">
-            <img src="live3.jpg" alt="Ritrattino dal vivo 3">
-            <img src="live4.jpg" alt="Ritrattino dal vivo 4">
-        </div>
-    </section>  
-
-    <footer>
+      <footer>
         <p>Contatti: email@example.com - Telefono: +39 123 456 789</p>
         <p>© 2024 Doodle Factory - Tutti i diritti riservati</p>
-        <p>Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
-    </footer>
+        <p>
+          Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a>
+        </p>
+      </footer>
+    </div>
+  );
+};
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
-        const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
-        let currentBannerIndex = 0;
-        let bannerInterval;
+const Section = ({ sectionId }) => {
+  const sectionTitles = {
+    about: 'Chi sono',
+    portraits: 'Ritratti',
+    illustrations: 'Illustrazioni',
+    wedding: 'Wedding',
+    favors: 'Bomboniere',
+    live_sketches: 'Ritrattini dal vivo'
+  };
 
-        // Menu toggle click listener
-        menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('show');
-            adjustBannerMargin();
-        });
+  const sectionContent = {
+    about: (
+      <>
+        <img
+          src="profiloDF1.jfif"
+          alt="Profilo Doodle Factory"
+          className="profile-image"
+        />
+        <p>Ciao, che bello che sei qui! Sono Marina, grafica e illustratrice freelance. Doodle Factory Lab è il mio laboratorio creativo...</p>
+      </>
+    ),
+    portraits: (
+      <>
+        <p>I ritratti sono sempre mezzobusto e abbracciati, le linee sono morbide e tondeggianti...</p>
+        <IllustrationGallery images={['Ritratto1.jfif', 'Ritratto2.jfif', 'Ritratto3.jfif', 'Ritratto4.jfif']} />
+      </>
+    ),
+    illustrations: (
+      <>
+        <p>Le mie illustrazioni sono pensate per raccontare storie...</p>
+        <IllustrationGallery images={['illustrazione1.jpg', 'illustrazione2.jpg', 'illustrazione3.jpg', 'illustrazione4.jpg']} />
+      </>
+    ),
+    wedding: (
+      <>
+        <p>Celebra il giorno più bello con illustrazioni e decorazioni personalizzate...</p>
+        <IllustrationGallery images={['wedding1.jpg', 'wedding2.jpg', 'wedding3.jpg', 'wedding4.jpg']} />
+      </>
+    ),
+    favors: (
+      <>
+        <p>Le bomboniere illustrate sono piccoli regali che lasciano un grande ricordo...</p>
+        <IllustrationGallery images={['bomboniera1.jpg', 'bomboniera2.jpg', 'bomboniera3.jpg', 'bomboniera4.jpg']} />
+      </>
+    ),
+    live_sketches: (
+      <>
+        <p>Rendi speciale il tuo evento con ritrattini dal vivo...</p>
+        <IllustrationGallery images={['live1.jpg', 'live2.jpg', 'live3.jpg', 'live4.jpg']} />
+      </>
+    )
+  };
 
-        // Navigation link smooth scroll
-        const navLinks = document.querySelectorAll('#menu a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Hide mobile menu after clicking a link
-                if (menu.classList.contains('show')) {
-                    menu.classList.remove('show');
-                    adjustBannerMargin();
-                }
-            });
-        });
+  return (
+    <section id={sectionId} className="content-section">
+      <h2>{sectionTitles[sectionId]}</h2>
+      {sectionContent[sectionId]}
+    </section>
+  );
+};
 
-        // Banner change logic
-        function changeBanner(direction) {
-            currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
-            document.getElementById('current-banner').src = banners[currentBannerIndex];
-        }
+const IllustrationGallery = ({ images }) => {
+  return (
+    <div className="illustrations">
+      {images.map((imgSrc, index) => (
+        <img key={index} src={imgSrc} alt={`Illustration ${index + 1}`} className="illustration-image" />
+      ))}
+    </div>
+  );
+};
 
-        function startBannerRotation() {
-            bannerInterval = setInterval(() => changeBanner(1), 5000);
-        }
-
-        function stopBannerRotation() {
-            clearInterval(bannerInterval);
-        }
-
-        document.getElementById('prev-banner').addEventListener('click', () => {
-            stopBannerRotation();
-            changeBanner(-1);
-            startBannerRotation();
-        });
-
-        document.getElementById('next-banner').addEventListener('click', () => {
-            stopBannerRotation();
-            changeBanner(1);
-            startBannerRotation();
-        });
-
-        startBannerRotation();
-
-        // Adjust banner margin dynamically based on header height
-        function adjustBannerMargin() {
-            const header = document.querySelector('header');
-            const bannerContainer = document.querySelector('.banner-container');
-            bannerContainer.style.marginTop = ${header.offsetHeight}px;
-        }
-
-        // Adjust the display style of the menu depending on screen size
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                menu.classList.remove('show'); // Assicurati che il menu non sia visibile per desktop
-            }
-            adjustBannerMargin();
-        });
-
-        // Initial adjustment after page load
-        adjustBannerMargin();
-    });
-</script>
-
-</body>
-</html>
+export default App;
