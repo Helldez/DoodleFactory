@@ -257,6 +257,7 @@
                 bottom: 0;
                 z-index: 1000;
                 overflow-y: auto;
+                padding-top: 60px;
             }
 
             nav.show {
@@ -268,6 +269,8 @@
                 width: 100%;
                 text-align: left;
                 font-size: 1.8em;
+                padding: 12px 20px; /* Riduciamo leggermente il padding verticale */
+                font-size: 1.6em; /* Riduciamo leggermente la dimensione del font */
             }
 
             #menu-toggle {
@@ -442,10 +445,10 @@
             const bannerHeight = christmasBanner.style.display !== 'none' ? christmasBanner.offsetHeight : 0;
             header.style.top = `${bannerHeight}px`;
             bannerContainer.style.marginTop = `${header.offsetHeight + bannerHeight}px`;
-
+        
             if (window.innerWidth <= 768 && nav.classList.contains('show')) {
                 christmasBanner.style.top = '0';
-                nav.style.paddingTop = `${bannerHeight + header.offsetHeight}px`;
+                nav.style.paddingTop = `${bannerHeight + 40}px`; // Riduciamo questo valore
             } else {
                 christmasBanner.style.top = '0';
                 nav.style.paddingTop = '';
