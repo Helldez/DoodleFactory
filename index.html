@@ -195,13 +195,34 @@
                 font-size: 1.6em;
             }
         }
+
+                .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%; /* Altezza del logo */
+            flex-grow: 1;
+        }
+        
+        .responsive-logo {
+            max-width: 100%; /* Massima larghezza consentita per adattarsi alla pagina */
+            height: auto; /* Mantiene le proporzioni del logo */
+            max-height: 70px; /* Assicura che il logo non sia troppo grande */
+            object-fit: contain; /* Evita distorsioni */
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .responsive-logo {
+                max-height: 60px; /* Ridimensiona il logo su dispositivi mobili */
+            }
+        }
+        
     </style>
 </head>
 <body>
     <header>
-        <div class="title-container">
-            <h1>Doodle Factory Lab</h1>
-            <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
+        <div class="logo-container">
+            <img src="/mnt/data/logo.jpeg" alt="Doodle Factory Lab Logo" class="responsive-logo">
         </div>
         <button id="menu-toggle">&#9776;</button>
         <nav id="menu">
@@ -213,6 +234,7 @@
             <a href="#live_sketches">Ritrattini dal vivo</a>
         </nav>
     </header>
+
 
     <div class="banner-container">
         <img src="Banner3.PNG" alt="Banner 1" id="current-banner">
