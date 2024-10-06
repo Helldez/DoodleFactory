@@ -184,7 +184,7 @@
                 padding: 10px 20px;
             }
             header h1 {
-                font-size: 1.8em; /* Riduci la dimensione del titolo per evitare sovrapposizioni */
+                font-size: 1.8em;
             }
             .title-container {
                 margin-bottom: 0;
@@ -225,7 +225,7 @@
                 right: 10px;
             }
             .banner-container {
-                margin-top: 80px;
+                margin-top: 120px;
             }
             section h2 {
                 font-size: 2.2em;
@@ -306,13 +306,15 @@
                     const targetId = link.getAttribute('href').substring(1);
                     const targetElement = document.getElementById(targetId);
                     
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
                     
                     // Hide mobile menu after clicking a link
                     if (menu.classList.contains('show')) {
