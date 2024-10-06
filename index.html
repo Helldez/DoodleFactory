@@ -128,6 +128,7 @@
             object-position: center; /* Centra l'immagine */
             border-radius: 15px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
         .illustrations img:hover {
             transform: scale(1.1);
@@ -226,10 +227,10 @@
             <h2>Chi sono</h2>
             <p>Ciao, che bello che sei qui! </p>
             <p>Sono Marina, grafica e illustratrice freelance.</p>
-            <p>Doodle Factory Lab è il mio laboratorio creativo, dove ricordi ed emozioni prendono forma e colore.</p> 
+            <p>Doodle Factory Lab è il mio laboratorio creativo, dove ricordi ed emozioni prendono forma e colore.</p>
             <p>Sono nata in una notte tempestosa d’estate sotto il segno del Cancro, amo la cioccolata, l’arte in tutte le sue forme e tutto ciò che richiede manualità.</p>  
             <p>Col tempo, ho capito che ciò che amo fare di più è disegnare e avere sempre qualcosa di nuovo su cui lavorare. Nel mio lab impacchetto tra fiori essiccati, nastri e un bel pó di sano disordine creativo.</p>  
-            <p>Qui puoi trovare Ritratti e Illustrazioni personalizzate, bigliettini d’auguri, tag, bomboniere con un tocco artistico, coordinati grafici per qualsiasi tipo di evento e, se hai un brand o un’azienda, posso aiutarti tramite progetti illustrati su misura per te. 
+            <p>Qui puoi trovare Ritratti e Illustrazioni personalizzate, bigliettini d’auguri, tag, bomboniere con un tocco artistico, coordinati grafici per qualsiasi tipo di evento e, se hai un brand o un’azienda, posso aiutarti tramite progetti illustrati su misura per te.
             Prenditi pure un po’ di tempo per curiosare….</p>
         </div>
     </section>
@@ -369,7 +370,7 @@
         function adjustBannerMargin() {
             const header = document.querySelector('header');
             const bannerContainer = document.querySelector('.banner-container');
-            bannerContainer.style.marginTop = ${header.offsetHeight}px;
+            bannerContainer.style.marginTop = `${header.offsetHeight}px`;
         }
 
         // Adjust the display style of the menu depending on screen size
@@ -380,7 +381,7 @@
             adjustBannerMargin();
         });
 
-            // Initial adjustment after page load
+        // Initial adjustment after page load
         adjustBannerMargin();
 
         // Image gallery functionality
@@ -415,7 +416,7 @@
             });
         });
     });
-        
 </script>
+
 </body>
 </html>
