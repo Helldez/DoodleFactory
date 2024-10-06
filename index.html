@@ -23,13 +23,15 @@
             z-index: 1000;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             opacity: 0.95;
-            height: 80px;
             padding: 0 20px;
+            flex-wrap: wrap;
         }
         header .title-container {
             display: flex;
             align-items: center;
+            flex: 1;
         }
         header h1 {
             font-size: 2.5em;
@@ -177,9 +179,13 @@
             }
             header {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
                 height: auto;
                 padding: 10px 20px;
+            }
+            .title-container {
+                margin-bottom: 10px;
+                text-align: center;
             }
             nav {
                 display: none;
@@ -230,7 +236,7 @@
             <img src="profiloDF1.jfif" alt="Profilo Doodle Factory" class="profile-image">
             <div>
                 <h1>Doodle Factory Lab</h1>
-                <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
+                <p class="slogan">Illustrazioni e Graphic Design</p>
             </div>
         </div>
         <button id="menu-toggle">
