@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doodle Factory Lab</title>
@@ -66,6 +67,10 @@
             border: none;
             padding: 10px;
             font-size: 2em;
+            transition: transform 0.3s ease;
+        }
+        #menu-toggle.show {
+            transform: rotate(90deg);
         }
         .banner-container {
             position: relative;
@@ -204,7 +209,7 @@
             <h1>Doodle Factory Lab</h1>
             <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
         </div>
-        <button id="menu-toggle">&#9776;</button>
+        <button id="menu-toggle"><i class="fas fa-bars"></i></button>
         <nav id="menu">
             <a href="#about">Chi sono</a>
             <a href="#portraits">Ritratti</a>
@@ -311,6 +316,7 @@
         // Menu toggle click listener
         menuToggle.addEventListener('click', () => {
             menu.classList.toggle('show');
+            menuToggle.classList.toggle('show');
             adjustBannerMargin();
         });
 
@@ -333,6 +339,7 @@
                 // Hide mobile menu after clicking a link
                 if (menu.classList.contains('show')) {
                     menu.classList.remove('show');
+                    menuToggle.classList.remove('show');
                     adjustBannerMargin();
                 }
             });
@@ -377,6 +384,7 @@
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 menu.classList.remove('show'); // Assicurati che il menu non sia visibile per desktop
+                menuToggle.classList.remove('show');
             }
             adjustBannerMargin();
         });
