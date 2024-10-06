@@ -218,7 +218,11 @@
         }
     </style>
 </head>
-<body>
+
+    <div id="top-banner" style="background-color: #cb1d1d; color: white; text-align: center; padding: 10px; position: fixed; top: 0; left: 0; right: 0; z-index: 2000; font-size: 1.4em; display: flex; align-items: center; justify-content: center;">
+        <span style="margin-right: 10px;">🎄 Le prenotazioni per Natale sono aperte! 🎄</span>
+        <button id="close-banner" style="background: none; border: none; color: white; font-size: 1.2em; cursor: pointer; margin-left: 10px;">&times;</button>
+    </div>
     <header>
         <div class="title-container">
             <h1>Doodle Factory Lab</h1>
@@ -248,7 +252,7 @@
     </div>
 
     <section id="about">
-        <img src="chi_sono.png" alt="Profilo Doodle Factory" style="margin: 0 auto; display: block; width: 250px; height: 250px; border-radius: 15px; object-fit: cover;">
+        <img src="chi_sono.jpeg" alt="Profilo Doodle Factory" style="margin: 0 auto; display: block; width: 250px; height: 250px; border-radius: 15px; object-fit: cover;">
         <div style="margin-top: 20px;">
             <h2>Chi sono</h2>
             <p>Ciao, che bello che sei qui! </p>
@@ -333,8 +337,12 @@
         <p>Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
     </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
+
+        const topBanner = document.getElementById('top-banner');
+        const closeBanner = document.getElementById('close-banner');
+        closeBanner.addEventListener('click', () => {
+            topBanner.style.display = 'none';
+        });
         const menuToggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
         const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
