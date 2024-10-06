@@ -7,51 +7,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doodle Factory Lab</title>
     <style>
-        body {
-            background-color: #fdfdfd;
-            font-family: 'Amatic SC', cursive;
+        /* Reset e stili di base */
+        * {
             margin: 0;
             padding: 0;
-            text-align: center;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Amatic SC', cursive;
+            background-color: #fdfdfd;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Stili del banner natalizio */
+        #christmas-banner {
+            background-color: #cb1d1d;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.2em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1002;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: top 0.3s ease;
+        }
+
+        #christmas-banner .close-banner {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.5em;
+            line-height: 1;
+        }
+
+        #christmas-banner i {
+            margin-right: 10px;
+        }
+
+        /* Stili dell'header */
         header {
             background-color: #f5d5c0;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 999;
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            opacity: 0.95;
             height: 80px;
             padding: 0 20px;
-            margin-top: 0;
-            transition: top 0.3s ease;
+            transition: top 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
         }
+
         header .title-container {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
         }
+
         header h1 {
             font-size: 2.5em;
             color: #cb1d1d;
             margin: 0;
         }
+
         header p.slogan {
             font-size: 1.4em;
             color: #cb1d1d;
             margin: 0;
             font-weight: bold;
         }
+
+        /* Stili della navigazione */
         nav {
             display: flex;
             gap: 30px;
             align-items: center;
             height: 100%;
         }
+
         nav a {
             color: #cb1d1d;
             text-decoration: none;
@@ -59,37 +105,46 @@
             font-weight: bold;
             transition: color 0.3s ease;
         }
+
         nav a:hover {
             color: #e94f37;
         }
+
         #menu-toggle {
             display: none;
             background-color: transparent;
             border: none;
             font-size: 2em;
             cursor: pointer;
-            z-index: 1002;
+            z-index: 1001;
         }
+
         .menu-icon {
             display: flex;
             flex-direction: column;
             gap: 4px;
         }
+
         .menu-icon div {
             width: 30px;
             height: 3px;
             background-color: #cb1d1d;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
+
         #menu-toggle.open .menu-icon div:nth-child(1) {
-            transform: rotate(45deg) translateY(8px);
+            transform: rotate(45deg) translate(5px, 5px);
         }
+
         #menu-toggle.open .menu-icon div:nth-child(2) {
             opacity: 0;
         }
+
         #menu-toggle.open .menu-icon div:nth-child(3) {
-            transform: rotate(-45deg) translateY(-8px);
+            transform: rotate(-45deg) translate(7px, -6px);
         }
+
+        /* Stili del banner principale */
         .banner-container {
             position: relative;
             width: 100%;
@@ -97,11 +152,13 @@
             overflow: hidden;
             margin-top: 80px;
         }
+
         .banner-container img {
             width: 100%;
-            height: 500px;
+            height: 100%;
             object-fit: cover;
         }
+
         .banner-arrow {
             position: absolute;
             top: 50%;
@@ -115,103 +172,84 @@
             transform: translateY(-50%);
             z-index: 100;
         }
+
         .banner-arrow.left {
             left: 10px;
         }
+
         .banner-arrow.right {
             right: 10px;
         }
+
+        /* Stili delle sezioni */
         section {
             padding: 40px;
             margin: 40px 0;
             background-color: #ffffff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         section h2 {
             font-size: 2.5em;
             color: #cb1d1d;
+            margin-bottom: 20px;
         }
+
         section p {
             font-size: 1.4em;
             color: #333;
             line-height: 1.4;
+            margin-bottom: 15px;
         }
+
+        /* Stili delle illustrazioni */
         .illustrations {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
         }
-        
+
         .illustrations img {
-            width: calc(100% / 2 - 20px);
+            width: calc(50% - 10px);
             max-width: 300px;
             height: auto;
             object-fit: cover;
-            object-position: center;
             border-radius: 15px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
+
         .illustrations img:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
+
+        /* Stili del footer */
         footer {
             text-align: center;
             padding: 30px;
             font-size: 1.4em;
             color: #cb1d1d;
             background-color: #f5d5c0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 40px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Styles for the Christmas banner */
-        #christmas-banner {
-            background-color: #cb1d1d;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-size: 1.2em;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1001;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #christmas-banner .close-banner {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            font-size: 1.5em;
-            line-height: 1;
-        }
-        #christmas-banner i {
-            margin-right: 10px;
-        }
-
+        /* Media queries per responsività */
         @media only screen and (max-width: 768px) {
-            .illustrations img {
-                width: calc(100% - 20px);
-            }
             header {
                 flex-direction: column;
                 align-items: flex-start;
                 height: auto;
                 padding: 10px 20px;
             }
+
             nav {
                 display: none;
                 flex-direction: column;
                 background-color: #f5d5c0;
                 width: 100%;
-                padding: 10px 0;
+                padding: 20px 0;
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -219,33 +257,43 @@
                 bottom: 0;
                 z-index: 1000;
                 overflow-y: auto;
-                gap: 15px;
             }
+
             nav.show {
                 display: flex;
             }
+
             nav a {
                 padding: 15px 20px;
                 width: 100%;
-                box-sizing: border-box;
                 text-align: left;
                 font-size: 1.8em;
             }
+
             #menu-toggle {
                 display: block;
                 position: absolute;
                 top: 10px;
                 right: 10px;
             }
+
             .banner-container {
-                margin-top: 100px;
+                margin-top: 120px;
+                height: 300px;
             }
+
+            .illustrations img {
+                width: 100%;
+            }
+
             section h2 {
                 font-size: 2.2em;
             }
+
             section p {
                 font-size: 1.6em;
             }
+
             #christmas-banner {
                 font-size: 1em;
             }
@@ -372,35 +420,63 @@
     </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
-        const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
-        let currentBannerIndex = 0;
-        let bannerInterval;
+    document.addEventListener('DOMContentLoaded', function() {
         const christmasBanner = document.getElementById('christmas-banner');
         const closeBanner = document.querySelector('.close-banner');
         const header = document.querySelector('header');
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.querySelector('nav');
+        const bannerContainer = document.querySelector('.banner-container');
+        const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
+        let currentBannerIndex = 0;
+        let bannerInterval;
 
-        // Show header after DOM is loaded
-        header.style.visibility = 'visible';
+        function showHeader() {
+            setTimeout(() => {
+                header.style.opacity = '1';
+                adjustLayout();
+            }, 100);
+        }
 
-        // Christmas banner close functionality
+        function adjustLayout() {
+            const bannerHeight = christmasBanner.style.display !== 'none' ? christmasBanner.offsetHeight : 0;
+            header.style.top = `${bannerHeight}px`;
+            bannerContainer.style.marginTop = `${header.offsetHeight + bannerHeight}px`;
+
+            if (window.innerWidth <= 768 && nav.classList.contains('show')) {
+                christmasBanner.style.top = '0';
+                nav.style.paddingTop = `${bannerHeight + header.offsetHeight}px`;
+            } else {
+                christmasBanner.style.top = '0';
+                nav.style.paddingTop = '';
+            }
+        }
+
+        function changeBanner(direction) {
+            currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
+            document.getElementById('current-banner').src = banners[currentBannerIndex];
+        }
+
+        function startBannerRotation() {
+            bannerInterval = setInterval(() => changeBanner(1), 5000);
+        }
+
+        function stopBannerRotation() {
+            clearInterval(bannerInterval);
+        }
+
         closeBanner.addEventListener('click', () => {
             christmasBanner.style.display = 'none';
             adjustLayout();
         });
 
-        // Menu toggle click listener
         menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('show');
+            nav.classList.toggle('show');
             menuToggle.classList.toggle('open');
             adjustLayout();
         });
 
-        // Navigation link smooth scroll
-        const navLinks = document.querySelectorAll('#menu a');
-        navLinks.forEach(link => {
+        document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', (event) => {
                 event.preventDefault();
                 const targetId = link.getAttribute('href').substring(1);
@@ -415,28 +491,13 @@
                     behavior: 'smooth'
                 });
                 
-                // Hide mobile menu after clicking a link
-                if (menu.classList.contains('show')) {
-                    menu.classList.remove('show');
+                if (nav.classList.contains('show')) {
+                    nav.classList.remove('show');
                     menuToggle.classList.remove('open');
                     adjustLayout();
                 }
             });
         });
-
-        // Banner change logic
-        function changeBanner(direction) {
-            currentBannerIndex = (currentBannerIndex + direction + banners.length) % banners.length;
-            document.getElementById('current-banner').src = banners[currentBannerIndex];
-        }
-
-        function startBannerRotation() {
-            bannerInterval = setInterval(() => changeBanner(1), 5000);
-        }
-
-        function stopBannerRotation() {
-            clearInterval(bannerInterval);
-        }
 
         document.getElementById('prev-banner').addEventListener('click', () => {
             stopBannerRotation();
@@ -450,26 +511,7 @@
             startBannerRotation();
         });
 
-        startBannerRotation();
-
-        // Adjust layout based on Christmas banner and header
-        function adjustLayout() {
-            const bannerContainer = document.querySelector('.banner-container');
-            const bannerHeight = christmasBanner.style.display !== 'none' ? christmasBanner.offsetHeight : 0;
-            
-            header.style.top = `${bannerHeight}px`;
-            bannerContainer.style.marginTop = `${header.offsetHeight + bannerHeight}px`;
-        }
-
-        // Adjust the display style of the menu depending on screen size
-        window.addEventListener('resize', adjustLayout);
-
-        // Initial adjustment after page load
-        adjustLayout();
-
-        // Image gallery functionality
-        const illustrationImages = document.querySelectorAll('.illustrations img');
-        illustrationImages.forEach(img => {
+        document.querySelectorAll('.illustrations img').forEach(img => {
             img.addEventListener('click', () => {
                 const overlay = document.createElement('div');
                 overlay.style.position = 'fixed';
@@ -498,6 +540,11 @@
                 });
             });
         });
+
+        showHeader();
+        startBannerRotation();
+        window.addEventListener('resize', adjustLayout);
+        window.addEventListener('load', adjustLayout);
     });
     </script>
 </body>
