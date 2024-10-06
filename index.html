@@ -165,6 +165,34 @@
             margin-top: 40px;
         }
 
+        /* New styles for the Christmas banner */
+        #christmas-banner {
+            background-color: #cb1d1d;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.2em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #christmas-banner .close-banner {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+        #christmas-banner i {
+            margin-right: 10px;
+        }
+
         @media only screen and (max-width: 768px) {
             .illustrations img {
                 width: calc(100% - 20px);
@@ -215,10 +243,17 @@
             section p {
                 font-size: 1.6em;
             }
+            #christmas-banner {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
+    <div id="christmas-banner">
+        <i class="fas fa-tree"></i> Le prenotazioni per Natale sono aperte!
+        <span class="close-banner">&times;</span>
+    </div>
     <header>
         <div class="title-container">
             <h1>Doodle Factory Lab</h1>
@@ -333,19 +368,27 @@
         <p>Seguimi su Instagram: <a href="https://instagram.com/doodle_factory_lab" target="_blank">@doodle_factory_lab</a></p>
     </footer>
 
-<script>
+    <script>
     document.addEventListener('DOMContentLoaded', () => {
         const menuToggle = document.getElementById('menu-toggle');
         const menu = document.getElementById('menu');
         const banners = ['Banner1.PNG', 'Banner2.PNG', 'Banner3.PNG', 'Banner4.PNG'];
         let currentBannerIndex = 0;
         let bannerInterval;
+        const christmasBanner = document.getElementById('christmas-banner');
+        const closeBanner = document.querySelector('.close-banner');
+
+        // Christmas banner close functionality
+        closeBanner.addEventListener('click', () => {
+            christmasBanner.style.display = 'none';
+            adjustLayout();
+        });
 
         // Menu toggle click listener
         menuToggle.addEventListener('click', () => {
             menu.classList.toggle('show');
             menuToggle.classList.toggle('open');
-            adjustBannerMargin();
+            adjustLayout();
         });
 
         // Navigation link smooth scroll
@@ -357,7 +400,8 @@
                 const targetElement = document.getElementById(targetId);
                 
                 const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+                const bannerHeight = christmasBanner.offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight - bannerHeight;
                 
                 window.scrollTo({
                     top: targetPosition,
@@ -368,7 +412,7 @@
                 if (menu.classList.contains('show')) {
                     menu.classList.remove('show');
                     menuToggle.classList.remove('open');
-                    adjustBannerMargin();
+                    adjustLayout();
                 }
             });
         });
@@ -401,24 +445,21 @@
 
         startBannerRotation();
 
-        // Adjust banner margin dynamically based on header height
-        function adjustBannerMargin() {
+        // Adjust layout based on Christmas banner and header
+        function adjustLayout() {
             const header = document.querySelector('header');
             const bannerContainer = document.querySelector('.banner-container');
-            bannerContainer.style.marginTop = `${header.offsetHeight}px`;
+            const bannerHeight = christmasBanner.style.display !== 'none' ? christmasBanner.offsetHeight : 0;
+            
+            header.style.top = `${bannerHeight}px`;
+            bannerContainer.style.marginTop = `${header.offsetHeight + bannerHeight}px`;
         }
 
         // Adjust the display style of the menu depending on screen size
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                menu.classList.remove('show');
-                menuToggle.classList.remove('open');
-            }
-            adjustBannerMargin();
-        });
+        window.addEventListener('resize', adjustLayout);
 
         // Initial adjustment after page load
-        adjustBannerMargin();
+        adjustLayout();
 
         // Image gallery functionality
         const illustrationImages = document.querySelectorAll('.illustrations img');
@@ -452,7 +493,6 @@
             });
         });
     });
-</script>
-
+    </script>
 </body>
 </html>
