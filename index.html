@@ -44,6 +44,13 @@
             margin: 0;
             font-weight: bold;
         }
+        .profile-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
         nav {
             display: flex;
             gap: 30px;
@@ -220,9 +227,12 @@
 </head>
 <body>
     <header>
-        <div class="title-container">
-            <h1>Doodle Factory Lab</h1>
-            <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
+        <div class="title-container" style="display: flex; align-items: center;">
+            <img src="profiloDF1.jfif" alt="Profilo Doodle Factory" class="profile-image">
+            <div>
+                <h1>Doodle Factory Lab</h1>
+                <p class="slogan">Qui nascono progetti, emozioni, ricordi</p>
+            </div>
         </div>
         <button id="menu-toggle">
             <div class="menu-icon">
